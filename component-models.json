@@ -214,5 +214,51 @@
         "valueType": "string"
       }
     ]
+  },
+  {
+    "id": "carousel",
+    "fields": [
+      {
+        "component": "select",
+        "valueType": "string",
+        "name": "classes",
+        "label": "Carousel Type",
+        "value": "award-highlights",
+        "multi": false,
+        "options": [
+          {
+            "name": "Award Highlights",
+            "value": "award-highlights"
+          },
+          {
+            "name": "Group Highlights",
+            "value": "group-highlights"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "carousel-cards",
+    "fields": [
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "Image"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "title",
+        "label": "Card Title"
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "description",
+        "label": "Card Description"
+      }
+    ]
   }
 ]
