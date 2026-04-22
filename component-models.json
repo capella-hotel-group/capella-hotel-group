@@ -230,7 +230,15 @@
         "component": "reference",
         "valueType": "string",
         "name": "image",
-        "label": "Image"
+        "label": "Image",
+        "fields": [
+          {
+            "component": "text",
+            "valueType": "string",
+            "name": "altText",
+            "label": "Alt Text"
+          }
+        ]
       },
       {
         "component": "text",
