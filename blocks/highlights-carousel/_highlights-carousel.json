@@ -44,13 +44,15 @@
           "component": "reference",
           "valueType": "string",
           "name": "image",
-          "label": "Image"
-        },
-        {
-          "component": "text",
-          "valueType": "string",
-          "name": "imgAltText",
-          "label": "Image Alt Text"
+          "label": "Image",
+          "fields": [
+                {
+                "component": "text",
+                "valueType": "string",
+                "name": "altText",
+                "label": "Alt Text"
+                }
+            ]
         },
         {
           "component": "text",
