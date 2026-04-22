@@ -16,7 +16,14 @@
       "cards",
       "columns",
       "fragment",
-      "carousel"
+      "awards-carousel",
+      "highlights-carousel"
+    ]
+  },
+  {
+    "id": "awards-carousel",
+    "components": [
+      "carousel-cards"
     ]
   },
   {
@@ -41,7 +48,7 @@
     ]
   },
   {
-    "id": "carousel",
+    "id": "highlights-carousel",
     "components": [
       "carousel-cards"
     ]

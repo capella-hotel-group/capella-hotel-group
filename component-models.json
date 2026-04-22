@@ -142,6 +142,10 @@
     ]
   },
   {
+    "id": "awards-carousel",
+    "fields": []
+  },
+  {
     "id": "card",
     "fields": [
       {
@@ -216,27 +220,8 @@
     ]
   },
   {
-    "id": "carousel",
-    "fields": [
-      {
-        "component": "select",
-        "valueType": "string",
-        "name": "classes",
-        "label": "Carousel Type",
-        "value": "award-highlights",
-        "multi": false,
-        "options": [
-          {
-            "name": "Award Highlights",
-            "value": "award-highlights"
-          },
-          {
-            "name": "Group Highlights",
-            "value": "group-highlights"
-          }
-        ]
-      }
-    ]
+    "id": "highlights-carousel",
+    "fields": []
   },
   {
     "id": "carousel-cards",
