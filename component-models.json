@@ -235,6 +235,12 @@
       {
         "component": "text",
         "valueType": "string",
+        "name": "imgAltText",
+        "label": "Image Alt Text"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
         "name": "title",
         "label": "Card Title"
       },
