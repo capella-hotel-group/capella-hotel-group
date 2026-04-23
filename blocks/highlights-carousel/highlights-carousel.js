@@ -77,7 +77,8 @@ function initCarousel(slider, track, cards, prevBtn, nextBtn, dragCursor, stride
 
     // At the last index, snap the last card's right edge flush with the slider's right edge
     // instead of using the stride-based position which can leave a fractional gap.
-    const targetX = (vIdx >= maxIdx() && N > cardsPerView) ? slider.offsetWidth - (N * stride - GAP) : computeTargetX(vIdx);
+    const atEnd = vIdx >= maxIdx() && N > cardsPerView;
+    const targetX = atEnd ? slider.offsetWidth - (N * stride - GAP) : computeTargetX(vIdx);
 
     if (!animated) {
       trackX = targetX;
@@ -261,8 +262,7 @@ export default async function decorate(block) {
 
   const dragInner = document.createElement('div');
   dragInner.className = 'cc-drag-inner';
-  dragInner.innerHTML =
-    '<span class="cc-drag-arrow cc-drag-arrow--left">&#9664;</span><span class="cc-drag-circle">Drag</span><span class="cc-drag-arrow cc-drag-arrow--right">&#9654;</span>';
+  dragInner.innerHTML = '<span class="cc-drag-arrow cc-drag-arrow--left">&#9664;</span><span class="cc-drag-circle">Drag</span><span class="cc-drag-arrow cc-drag-arrow--right">&#9654;</span>';
   dragCursor.append(dragInner);
 
   block.replaceChildren(arrowContainer, sliderWrapper, dragCursor);
