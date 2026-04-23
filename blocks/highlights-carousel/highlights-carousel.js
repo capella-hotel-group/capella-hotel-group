@@ -25,6 +25,7 @@ function initCarousel(slider, track, cards, prevBtn, nextBtn, dragCursor, stride
   let isDragging = false;
   let dragMoved = false;
   let startX = 0;
+  let dragStartTrackX = 0;
   let rafId = 0;
 
   function maxIdx() {
@@ -48,7 +49,7 @@ function initCarousel(slider, track, cards, prevBtn, nextBtn, dragCursor, stride
   }
 
   function recalcCardsPerView() {
-    cardsPerView = Math.max(1, Math.floor(slider.offsetWidth / stride));
+    cardsPerView = Math.max(1, Math.floor((slider.offsetWidth + GAP) / stride));
   }
 
   function tick(now) {
@@ -73,7 +74,12 @@ function initCarousel(slider, track, cards, prevBtn, nextBtn, dragCursor, stride
 
   function go(idx, animated = true) {
     vIdx = Math.max(0, Math.min(idx, maxIdx()));
-    const targetX = computeTargetX(vIdx);
+
+    // At the last index, snap the last card's right edge flush with the slider's right edge
+    // instead of using the stride-based position which can leave a fractional gap.
+    const targetX = (vIdx >= maxIdx() && N > cardsPerView)
+      ? slider.offsetWidth - (N * stride - GAP)
+      : computeTargetX(vIdx);
 
     if (!animated) {
       trackX = targetX;
@@ -98,6 +104,7 @@ function initCarousel(slider, track, cards, prevBtn, nextBtn, dragCursor, stride
     isDragging = true;
     dragMoved = false;
     startX = e.clientX;
+    dragStartTrackX = trackX;
     trackTween = null;
     slider.setPointerCapture(e.pointerId);
   });
@@ -109,7 +116,7 @@ function initCarousel(slider, track, cards, prevBtn, nextBtn, dragCursor, stride
     if (!isDragging) return;
     const dx = e.clientX - startX;
     if (Math.abs(dx) > 3) dragMoved = true;
-    trackX = computeTargetX(vIdx) + dx;
+    trackX = dragStartTrackX + dx;
     applyTrack();
   });
 
