@@ -77,9 +77,7 @@ function initCarousel(slider, track, cards, prevBtn, nextBtn, dragCursor, stride
 
     // At the last index, snap the last card's right edge flush with the slider's right edge
     // instead of using the stride-based position which can leave a fractional gap.
-    const targetX = (vIdx >= maxIdx() && N > cardsPerView)
-      ? slider.offsetWidth - (N * stride - GAP)
-      : computeTargetX(vIdx);
+    const targetX = (vIdx >= maxIdx() && N > cardsPerView) ? slider.offsetWidth - (N * stride - GAP) : computeTargetX(vIdx);
 
     if (!animated) {
       trackX = targetX;
