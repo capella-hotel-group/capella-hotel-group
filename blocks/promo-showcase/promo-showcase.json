@@ -111,5 +111,12 @@
         ]
       }
     ],
-    "filters": []
+    "filters": [
+        {
+            "id": "promo-showcase",
+            "components": [
+              "promo-showcase-tab"
+            ]
+        }
+    ]
   }

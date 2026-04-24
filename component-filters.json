@@ -18,6 +18,12 @@
       "fragment",
       "awards-carousel",
       "highlights-carousel",
+      "promo-showcase"
+    ]
+  },
+  {
+    "id": "promo-showcase",
+    "components": [
       "promo-showcase-tab"
     ]
   },
