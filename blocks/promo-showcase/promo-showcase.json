@@ -10,32 +10,12 @@
               "template": {
                 "name": "Promo Showcase",
                 "model": "promo-showcase",
-                "classes": "",
-                "tabs": [
-                  {
-                    "model": "promo-showcase-tab"
-                  }
-                ]
+                "classes": ""
               }
             }
           }
         }
-    },
-    {
-        "title": "Promo Showcase Tab",
-        "id": "promo-showcase-tab",
-        "plugins": {
-            "xwalk": {
-                "page": {
-                    "resourceType": "core/franklin/components/block/v1/block/item",
-                    "template": {
-                        "name": "Promo Showcase Tab",
-                        "model": "promo-showcase-tab"
-                    }
-                }
-            }
-        }
-    }
+      }
     ],
     "models": [
       {
@@ -44,94 +24,82 @@
           {
             "component": "text",
             "name": "title",
-            "label": "Title",
+            "label": "Block Title",
             "valueType": "string",
             "required": true
           },
           {
-            "component": "group",
-            "name": "share-icons",
-            "label": "Share Icons",
+            "component": "container",
+            "name": "tabs",
+            "label": "Tabs",
+            "multiple": true,
+            "collapsible": true,
             "fields": [
               {
-                "component": "text",
-                "name": "instagram-url",
-                "label": "Instagram URL",
+                "component": "reference",
+                "name": "logo",
+                "label": "Tab Logo (click to switch tab)",
                 "valueType": "string",
+                "required": true,
+                "description": "Logo image used as the clickable tab selector"
+              },
+              {
+                "component": "text",
+                "name": "tab-title",
+                "label": "Tab Title",
+                "valueType": "string",
+                "required": true
+              },
+              {
+                "component": "richtext",
+                "name": "description",
+                "label": "Description",
+                "valueType": "string"
+              },
+              {
+                "component": "reference",
+                "name": "image",
+                "label": "Tab Image",
+                "valueType": "string",
+                "alt": true
+              }
+            ]
+          },
+          {
+            "component": "container",
+            "name": "share-icons",
+            "label": "Share Icons",
+            "multiple": true,
+            "collapsible": true,
+            "fields": [
+              {
+                "component": "reference",
+                "name": "icon",
+                "label": "Platform Icon",
+                "valueType": "string",
+                "required": true,
+                "description": "SVG or image icon for the social platform"
+              },
+              {
+                "component": "text",
+                "name": "url",
+                "label": "Profile / Page URL",
+                "valueType": "string",
+                "required": true,
                 "placeholder": "https://instagram.com/your-profile"
               },
               {
                 "component": "text",
-                "name": "facebook-url",
-                "label": "Facebook URL",
+                "name": "name",
+                "label": "Platform Name (optional)",
                 "valueType": "string",
-                "placeholder": "https://facebook.com/your-page"
-              },
-              {
-                "component": "text",
-                "name": "linkedin-url",
-                "label": "LinkedIn URL",
-                "valueType": "string",
-                "placeholder": "https://linkedin.com/company/your-company"
-              },
-              {
-                "component": "text",
-                "name": "twitter-url",
-                "label": "X (Twitter) URL",
-                "valueType": "string",
-                "placeholder": "https://x.com/your-handle"
-              },
-              {
-                "component": "text",
-                "name": "youtube-url",
-                "label": "YouTube URL",
-                "valueType": "string",
-                "placeholder": "https://youtube.com/your-channel"
+                "required": false,
+                "placeholder": "e.g. Instagram"
               }
             ]
           }
         ]
-      },
-      {
-        "id": "promo-showcase-tab",
-        "fields": [
-          {
-            "component": "reference",
-            "name": "logo",
-            "label": "Tab Logo (click to switch tab)",
-            "valueType": "string",
-            "required": true,
-            "description": "Logo image used as the clickable tab selector"
-          },
-          {
-            "component": "text",
-            "name": "tab-title",
-            "label": "Tab Title",
-            "valueType": "string",
-            "required": true
-          },
-          {
-            "component": "richtext",
-            "name": "description",
-            "label": "Description",
-            "valueType": "string"
-          },
-          {
-            "component": "reference",
-            "name": "image",
-            "label": "Tab Image",
-            "valueType": "string",
-            "alt": true
-          }
-        ]
       }
-    ],
-    "filters": [
-        {
-            "id": "promo-showcase",
-            "components": [
-              "promo-showcase-tab"
-            ]
-        }
     ]
   }
+  
