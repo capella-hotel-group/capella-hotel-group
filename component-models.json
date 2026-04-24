@@ -224,7 +224,7 @@
     "fields": [
       {
         "component": "text",
-        "name": "carouselTitle",
+        "name": "title",
         "valueType": "string",
         "label": "Carousel Title"
       }
