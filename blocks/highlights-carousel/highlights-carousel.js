@@ -185,15 +185,25 @@ export default async function decorate(block) {
 
   const cards = [];
 
-  const itemRows = [...block.children];
+  const allRows = [...block.children];
+
+  // First row is the block title
+  const titleRow = allRows[0];
+  const blockTitle = document.createElement('h2');
+  blockTitle.className = 'cc-block-title';
+  blockTitle.textContent = titleRow?.textContent?.trim() ?? '';
+
+  // Remaining rows are slides
+  const itemRows = allRows.slice(1);
 
   itemRows.forEach((row) => {
     const cells = [...row.children];
 
-    // cell[0] = picture, cell[1] = title, cell[2..] = content paragraphs
+    // cell[0] = image, cell[1] = alt, cell[2] = title, cell[3] = body
     const pictureEl = cells[0]?.querySelector('picture');
-    const title = cells[1]?.textContent?.trim() ?? '';
-    const contentCells = cells.slice(2);
+    const altText = cells[1]?.textContent?.trim() ?? '';
+    const title = cells[2]?.textContent?.trim() ?? '';
+    const bodyText = cells[3]?.textContent?.trim() ?? '';
 
     const li = document.createElement('li');
     li.className = 'cc-card-wrapper hc-card-wrapper';
@@ -208,7 +218,10 @@ export default async function decorate(block) {
     const imageDiv = document.createElement('div');
     imageDiv.className = 'cc-card-image';
     if (pictureEl) {
-      imageDiv.append(pictureEl.cloneNode(true));
+      const clonedPicture = pictureEl.cloneNode(true);
+      const img = clonedPicture.querySelector('img');
+      if (img && altText) img.alt = altText;
+      imageDiv.append(clonedPicture);
     }
 
     // Card body
@@ -219,20 +232,13 @@ export default async function decorate(block) {
     h3.textContent = title;
     bodyDiv.append(h3);
 
-    contentCells.forEach((cell, i) => {
-      const text = cell.textContent?.trim() ?? '';
-      if (!text) return;
-
-      if (i === 0) {
-        const hr = document.createElement('hr');
-        hr.className = 'cc-card-divider';
-        bodyDiv.append(hr);
-      }
-
+    if (bodyText) {
+      const hr = document.createElement('hr');
+      hr.className = 'cc-card-divider';
       const p = document.createElement('p');
-      p.textContent = text;
-      bodyDiv.append(p);
-    });
+      p.textContent = bodyText;
+      bodyDiv.append(hr, p);
+    }
 
     cardEl.append(imageDiv, bodyDiv);
     li.append(cardEl);
@@ -268,7 +274,7 @@ export default async function decorate(block) {
   dragInner.innerHTML = '<span class="cc-drag-arrow cc-drag-arrow--left">&#9664;</span><span class="cc-drag-circle">Drag</span><span class="cc-drag-arrow cc-drag-arrow--right">&#9654;</span>';
   dragCursor.append(dragInner);
 
-  block.replaceChildren(arrowContainer, sliderWrapper, dragCursor);
+  block.replaceChildren(blockTitle, arrowContainer, sliderWrapper, dragCursor);
 
   initCarousel(slider, track, cards, prevBtn, nextBtn, dragCursor, stride);
 }
