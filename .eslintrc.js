@@ -21,7 +21,7 @@ module.exports = {
     'xwalk/max-cells': ['error', {
       '*': 4, // Default limit for most blocks
       'promo-showcase': 8, // Explicitly allow 8 cells for promo-showcase block
-      'promo-showcase-tab':8, // Explicitly allow 8 cells for promo-showcase-tab block
+      'promo-showcase-tab': 8, // Explicitly allow 8 cells for promo-showcase-tab block
     }],
   },
 };
