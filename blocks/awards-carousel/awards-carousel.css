@@ -164,7 +164,7 @@
     height: 100%;
 }
 
-.ac-card-image img {
+.awards-carousel .ac-card-image img {
     width: auto;
     max-width: 100%;
     height: 100%;
@@ -177,13 +177,13 @@
     padding-top: 30px;
 }
 
-.ac-card-body h3 {
+.awards-carousel .ac-card-body h3 {
     font-family: Goudy, sans-serif;
     font-size: 20px;
     font-weight: 400;
     letter-spacing: 0.5px;
     margin: 0;
-    color: rgb(36, 47, 58);
+    color: rgb(36 47 58);
     text-transform: uppercase;
 }
 
@@ -193,13 +193,13 @@
     margin: 15px 0;
 }
 
-.ac-card-body-section p {
+.awards-carousel .ac-card-body-section p {
     font-family: Calibre, Arial, sans-serif;
     font-size: 17px;
     font-weight: 300;
     line-height: 27.2px;
     margin: 0;
-    color: rgb(140, 137, 133);
+    color: rgb(140 137 133);
     text-transform: uppercase;
 }
 
