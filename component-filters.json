@@ -22,12 +22,6 @@
     ]
   },
   {
-    "id": "promo-showcase",
-    "components": [
-      "promo-showcase-tab"
-    ]
-  },
-  {
     "id": "awards-carousel",
     "components": [
       "carousel-cards"

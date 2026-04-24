@@ -216,27 +216,7 @@
                 "template": {
                   "name": "Promo Showcase",
                   "model": "promo-showcase",
-                  "classes": "",
-                  "tabs": [
-                    {
-                      "model": "promo-showcase-tab"
-                    }
-                  ]
-                }
-              }
-            }
-          }
-        },
-        {
-          "title": "Promo Showcase Tab",
-          "id": "promo-showcase-tab",
-          "plugins": {
-            "xwalk": {
-              "page": {
-                "resourceType": "core/franklin/components/block/v1/block/item",
-                "template": {
-                  "name": "Promo Showcase Tab",
-                  "model": "promo-showcase-tab"
+                  "classes": ""
                 }
               }
             }
