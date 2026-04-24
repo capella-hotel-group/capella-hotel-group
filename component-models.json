@@ -265,5 +265,92 @@
         "label": "Card Description"
       }
     ]
+  },
+  {
+    "id": "promo-showcase",
+    "fields": [
+      {
+        "component": "text",
+        "name": "title",
+        "label": "Title",
+        "valueType": "string",
+        "required": true
+      },
+      {
+        "component": "group",
+        "name": "share-icons",
+        "label": "Share Icons",
+        "fields": [
+          {
+            "component": "text",
+            "name": "instagram-url",
+            "label": "Instagram URL",
+            "valueType": "string",
+            "placeholder": "https://instagram.com/your-profile"
+          },
+          {
+            "component": "text",
+            "name": "facebook-url",
+            "label": "Facebook URL",
+            "valueType": "string",
+            "placeholder": "https://facebook.com/your-page"
+          },
+          {
+            "component": "text",
+            "name": "linkedin-url",
+            "label": "LinkedIn URL",
+            "valueType": "string",
+            "placeholder": "https://linkedin.com/company/your-company"
+          },
+          {
+            "component": "text",
+            "name": "twitter-url",
+            "label": "X (Twitter) URL",
+            "valueType": "string",
+            "placeholder": "https://x.com/your-handle"
+          },
+          {
+            "component": "text",
+            "name": "youtube-url",
+            "label": "YouTube URL",
+            "valueType": "string",
+            "placeholder": "https://youtube.com/your-channel"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "promo-showcase-tab",
+    "fields": [
+      {
+        "component": "reference",
+        "name": "logo",
+        "label": "Tab Logo (click to switch tab)",
+        "valueType": "string",
+        "required": true,
+        "description": "Logo image used as the clickable tab selector"
+      },
+      {
+        "component": "text",
+        "name": "tab-title",
+        "label": "Tab Title",
+        "valueType": "string",
+        "required": true
+      },
+      {
+        "component": "richtext",
+        "name": "description",
+        "label": "Description",
+        "valueType": "string"
+      },
+      {
+        "component": "reference",
+        "name": "image",
+        "label": "Tab Image",
+        "valueType": "string",
+        "alt": true
+      }
+    ]
   }
 ]

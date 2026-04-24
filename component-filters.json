@@ -17,7 +17,14 @@
       "columns",
       "fragment",
       "awards-carousel",
-      "highlights-carousel"
+      "highlights-carousel",
+      "promo-showcase"
+    ]
+  },
+  {
+    "id": "promo-showcase",
+    "components": [
+      "promo-showcase-tab"
     ]
   },
   {
