@@ -143,7 +143,14 @@
   },
   {
     "id": "awards-carousel",
-    "fields": []
+    "fields": [
+      {
+        "component": "text",
+        "name": "title",
+        "valueType": "string",
+        "label": "Carousel Title"
+      }
+    ]
   },
   {
     "id": "card",
