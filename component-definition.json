@@ -216,7 +216,7 @@
                 "template": {
                   "name": "Promo Showcase",
                   "model": "promo-showcase",
-                  "classes": ""
+                  "filter": "promo-showcase"
                 }
               }
             }
