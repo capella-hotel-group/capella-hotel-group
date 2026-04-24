@@ -11,10 +11,10 @@
 /* ── Block Title ── */
 
 .cc-block-title {
-    font-family: 'Goudy', sans-serif;
+    font-family: Goudy, sans-serif;
     font-weight: 400;
     font-size: 40px;
-    color: rgb(36, 47, 58);
+    color: rgb(36 47 58);
     line-height: 1;
     margin: 0;
     padding: 0 40px;
@@ -217,7 +217,7 @@
     letter-spacing: 1.6px;
     text-transform: uppercase;
     margin: 0;
-    color: rgb(36, 47, 58);
+    color: rgb(36 47 58);
 }
 
 /* ── Drag Cursor ── */
