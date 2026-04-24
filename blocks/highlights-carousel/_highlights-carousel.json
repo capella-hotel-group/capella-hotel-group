@@ -10,7 +10,8 @@
             "template": {
               "name": "Highlights Carousel",
               "model": "highlights-carousel",
-              "filter": "highlights-carousel"
+              "filter": "highlights-carousel",
+              "title":""
             }
           }
         }
