@@ -221,7 +221,14 @@
   },
   {
     "id": "highlights-carousel",
-    "fields": []
+    "fields": [
+      {
+        "component": "text",
+        "name": "carouselTitle",
+        "valueType": "string",
+        "label": "Carousel Title"
+      }
+    ]
   },
   {
     "id": "carousel-cards",
