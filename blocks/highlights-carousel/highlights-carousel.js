@@ -1,3 +1,5 @@
+import { moveInstrumentation } from '../../scripts/scripts.js';
+
 // ── Constants ─────────────────────────────────────────────────────────────────
 const CARD_W = 400;
 const GAP = 55;
@@ -195,10 +197,11 @@ export default async function decorate(block) {
 
     const li = document.createElement('li');
     li.className = 'cc-card-wrapper hc-card-wrapper';
+    moveInstrumentation(row, li);
 
     const cardEl = document.createElement('a');
     cardEl.className = 'cc-card';
-    cardEl.href = 'javascript:void(0)'; // eslint-disable-line no-script-url
+    cardEl.href = '#';
     cardEl.setAttribute('role', 'presentation');
 
     // Card image
