@@ -2,7 +2,7 @@
 header .nav-wrapper {
   background-color: var(--background-color);
   width: 100%;
-  z-index: 2;
+  z-index: 20;
   position: sticky; /* task 2.1: sticky */
   top: 0;
   box-shadow: 0 8px 24px rgba(149, 157, 165, .2);
@@ -11,9 +11,7 @@ header .nav-wrapper {
 header nav {
   box-sizing: border-box;
   display: grid;
-  grid-template:
-    'brand hamburger' var(--nav-height)
-    'sections sections' 1fr / 1fr auto;
+  grid-template: 'brand hamburger' var(--nav-height) / 1fr auto;
   align-items: center;
   gap: 0 24px;
   margin: auto;
@@ -22,15 +20,20 @@ header nav {
   padding: 0 24px;
   font-family: var(--body-font-family);
   position: relative;
-  z-index: 10;
+  z-index: 2;
+}
+
+header nav::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-color: var(--background-color);
+  z-index: 1;
+  pointer-events: none;
 }
 
 header nav[aria-expanded='true'] {
-  grid-template:
-    'brand hamburger' var(--nav-height)
-    'sections sections' 1fr / 1fr auto;
-  overflow-y: auto;
-  min-height: 100dvh;
+  z-index: 2;
 }
 
 @media (width >= 900px) {
@@ -70,6 +73,7 @@ header nav .nav-hamburger {
   height: var(--nav-height);
   display: flex;
   align-items: center;
+  z-index: 15;
 }
 
 header nav .nav-hamburger button {
@@ -110,6 +114,7 @@ header .nav-brand {
   line-height: 1;
   display: flex;
   align-items: center;
+  z-index: 15;
 }
 
 header nav .nav-brand img {
@@ -118,26 +123,32 @@ header nav .nav-brand img {
   height: auto;
 }
 
-/* sections — task 2.8: slide-down transition */
+/* sections — fixed below header on mobile, slides up/down */
 header nav .nav-sections {
-  grid-area: sections;
-  flex: 1 1 auto;
+  position: fixed;
+  top: var(--nav-height);
+  left: 0;
+  right: 0;
+  height: calc(100dvh - var(--nav-height));
+  overflow-y: auto;
+  scrollbar-width: none;
+  background-color: #efefef;
+  z-index: 10;
+  padding: 0 24px;
+  box-sizing: border-box;
+  transform: translateY(-100%);
   visibility: hidden;
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.35s ease;
+  transition: transform 0.45s ease, visibility 0s 0.45s;
+}
+
+header nav .nav-sections::-webkit-scrollbar {
+  display: none;
 }
 
 header nav[aria-expanded='true'] .nav-sections {
+  transform: translateY(0);
   visibility: visible;
-  align-self: start;
-  max-height: 100dvh;
-  overflow-y: auto;
-  background-color: #efefef;
-  /* width: 100%; */
-  margin: 0 -24px;
-  padding: 16px 24px 0;
-  /* width: calc(100% + 48px); */
+  transition: transform 0.45s ease, visibility 0s 0s;
 }
 
 header nav .nav-sections ul {
@@ -303,7 +314,6 @@ header nav .nav-sections ul > li > .nav-mega-wrapper > ul > li {
 
 /* task 2.7: overlay */
 header .nav-overlay {
-  display: none;
   position: fixed;
   top: var(--nav-height);
   left: 0;
@@ -311,6 +321,7 @@ header .nav-overlay {
   bottom: 0;
   background: rgb(0 0 0 / 50%);
   z-index: 1;
+  display: none;
 }
 
 header .nav-overlay.is-visible {
