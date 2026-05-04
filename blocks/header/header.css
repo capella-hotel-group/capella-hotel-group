@@ -12,8 +12,8 @@ header nav {
   box-sizing: border-box;
   display: grid;
   grid-template:
-    'hamburger brand' var(--nav-height)
-    'sections sections' 1fr / auto 1fr;
+    'brand hamburger' var(--nav-height)
+    'sections sections' 1fr / 1fr auto;
   align-items: center;
   gap: 0 24px;
   margin: auto;
@@ -21,12 +21,14 @@ header nav {
   height: var(--nav-height);
   padding: 0 24px;
   font-family: var(--body-font-family);
+  position: relative;
+  z-index: 10;
 }
 
 header nav[aria-expanded='true'] {
   grid-template:
-    'hamburger brand' var(--nav-height)
-    'sections sections' 1fr / auto 1fr;
+    'brand hamburger' var(--nav-height)
+    'sections sections' 1fr / 1fr auto;
   overflow-y: auto;
   min-height: 100dvh;
 }
@@ -131,22 +133,45 @@ header nav[aria-expanded='true'] .nav-sections {
   align-self: start;
   max-height: 100dvh;
   overflow-y: auto;
+  background-color: #efefef;
+  /* width: 100%; */
+  margin: 0 -24px;
+  padding: 16px 24px 0;
+  /* width: calc(100% + 48px); */
 }
 
-/* task 2.2: nav link typography */
 header nav .nav-sections ul {
   list-style: none;
   padding-left: 0;
   font-family: 'Calibre', Arial, sans-serif;
-  font-size: 12px;
+  font-size: 15px;
   font-weight: 300;
-  letter-spacing: 0.8px;
+  letter-spacing: 0.6px;
   text-transform: uppercase;
 }
 
 header nav .nav-sections ul > li {
-  font-weight: 300;
-  padding: 12px 0;
+  font-weight: 400;
+  padding: 12.5px 0;
+  border-bottom: 1px solid rgba(36, 47, 58, 0.1);
+  font-size: 15px;
+  line-height: 25px;
+  letter-spacing: 0.6px;
+  color: #000;
+}
+
+header nav .nav-sections ul > li.nav-drop {
+  color: #8c8985;
+}
+
+header nav .nav-sections ul > li:last-child {
+  border-bottom: none;
+}
+
+header nav .nav-sections ul > li.nav-home {
+  color: #8c8985;
+  pointer-events: none;
+  cursor: default;
 }
 
 header nav .nav-sections ul > li > .nav-mega-wrapper > ul {
@@ -154,8 +179,9 @@ header nav .nav-sections ul > li > .nav-mega-wrapper > ul {
 }
 
 header nav .nav-sections ul > li > .nav-mega-wrapper > ul > li {
-  font-weight: 300;
-  padding: 8px 16px;
+  padding: 10px 0 0;
+  border: none;
+  color: #8c8985;
 }
 
 @media (width >= 900px) {
@@ -279,8 +305,10 @@ header nav .nav-sections ul > li > .nav-mega-wrapper > ul > li {
 header .nav-overlay {
   display: none;
   position: fixed;
-  inset: 0;
   top: var(--nav-height);
+  left: 0;
+  right: 0;
+  bottom: 0;
   background: rgb(0 0 0 / 50%);
   z-index: 1;
 }
@@ -289,4 +317,45 @@ header .nav-overlay.is-visible {
   display: block;
 }
 
+/* Mobile close chevron */
+@keyframes chevron-bounce {
+  0% {
+    opacity: 1;
+    transform: rotate(180deg) translateY(0);
+  }
 
+  100% {
+    opacity: 0;
+    transform: rotate(180deg) translateY(12px);
+  }
+}
+
+header .nav-chevron-close {
+  display: none;
+}
+
+header nav[aria-expanded='true'] .nav-chevron-close {
+  display: flex;
+  justify-content: center;
+  padding: 0 0 20px;
+}
+
+header nav[aria-expanded='true'] .nav-chevron-close button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  animation: chevron-bounce 1s ease-out infinite;
+  margin: 0;
+}
+
+header nav[aria-expanded='true'] .nav-chevron-close img {
+  width: 32px;
+  display: block;
+}
+
+@media (width >= 900px) {
+  header .nav-chevron-close {
+    display: none !important;
+  }
+}

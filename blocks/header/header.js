@@ -198,17 +198,26 @@ export default async function decorate(block) {
       megaWrapper.append(subUl);
     });
 
-    const navItems = navSections.querySelectorAll(':scope .default-content-wrapper > ul > li');
+    // Insert a disabled "Home" item at the top of the mobile nav list
+    const navUl = navSections.querySelector(':scope .default-content-wrapper > ul');
+    if (navUl) {
+      const homeItem = document.createElement('li');
+      homeItem.classList.add('nav-home');
+      homeItem.setAttribute('aria-disabled', 'true');
+      homeItem.textContent = 'Home';
+      navUl.prepend(homeItem);
+    }
+
+    const navItems = navSections.querySelectorAll(':scope .default-content-wrapper > ul > li:not(.nav-home)');
 
     navItems.forEach((navSection, index) => {
-      // task 3.3: mark first item as Home for CSS targeting
-      if (index === 0) navSection.classList.add('nav-home');
 
       if (navSection.querySelector('ul')) navSection.classList.add('nav-drop');
 
-      // task 3.4 + 3.5: click only on mobile; hover handled separately for desktop
-      navSection.addEventListener('click', () => {
+      // touch to expand/collapse on mobile; hover handled separately for desktop
+      navSection.addEventListener('touchend', (e) => {
         if (!isDesktop.matches) {
+          e.preventDefault();
           const expanded = navSection.getAttribute('aria-expanded') === 'true';
           toggleAllNavSections(navSections);
           navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
@@ -217,13 +226,30 @@ export default async function decorate(block) {
     });
   }
 
+  // Mobile close chevron — visible only on mobile, closes menu on click
+  const navChevron = document.createElement('div');
+  navChevron.className = 'nav-chevron-close';
+  navChevron.innerHTML = '<button type="button" aria-label="Close navigation"><img src="/icons/icon-chevron-down.svg" alt="" /></button>';
+  navChevron.addEventListener('touchend', (e) => {
+    e.preventDefault();
+    toggleMenu(nav, navSections, true);
+  });
+  navChevron.addEventListener('click', () => {
+    toggleMenu(nav, navSections, true);
+  });
+  if (navSections) navSections.append(navChevron);
+  else nav.append(navChevron);
+
   // task 3.1: MENU/CLOSE text toggle, no hamburger icon
   const hamburger = document.createElement('div');
   hamburger.classList.add('nav-hamburger');
   hamburger.innerHTML = `<button type="button" aria-controls="nav" aria-label="Open navigation">
       <span class="nav-hamburger-label">MENU</span>
     </button>`;
-  hamburger.addEventListener('click', () => toggleMenu(nav, navSections));
+  hamburger.addEventListener('touchend', (e) => {
+    e.preventDefault();
+    toggleMenu(nav, navSections);
+  });
   nav.prepend(hamburger);
 
   // task 3.2: overlay — appended to nav-wrapper after nav
@@ -233,7 +259,10 @@ export default async function decorate(block) {
 
   const overlay = document.createElement('div');
   overlay.className = 'nav-overlay';
-  overlay.addEventListener('click', () => toggleMenu(nav, navSections, true));
+  overlay.addEventListener('touchend', (e) => {
+    e.preventDefault();
+    toggleMenu(nav, navSections, true);
+  });
   navWrapper.append(overlay);
 
   block.append(navWrapper);
