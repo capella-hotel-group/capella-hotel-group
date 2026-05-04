@@ -2,6 +2,6 @@ Please always provide the [GitHub issue(s)](../issues) your PR is for, as well a
 
 Fix #<gh-issue-id>
 
-Test URLs:
+URL for testing:
 - Before: https://main--capella-hotel-group--capella-hotel-group.aem.live/
-- After: https://<branch>--capella-hotel-group--capella-hotel-group.aem.live/
+- After: https://main--capella-hotel-group--capella-hotel-group.aem.live/
