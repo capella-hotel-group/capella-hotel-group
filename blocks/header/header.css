@@ -28,7 +28,7 @@ header nav::before {
   position: absolute;
   inset: 0;
   background-color: var(--background-color);
-  z-index: 1;
+  z-index: 11;
   pointer-events: none;
 }
 
@@ -129,7 +129,7 @@ header nav .nav-sections {
   top: var(--nav-height);
   left: 0;
   right: 0;
-  height: calc(100dvh - var(--nav-height));
+  /* height: calc(100dvh - var(--nav-height)); */
   overflow-y: auto;
   scrollbar-width: none;
   background-color: #efefef;
