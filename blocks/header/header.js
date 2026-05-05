@@ -160,7 +160,7 @@ export default async function decorate(block) {
     const section = nav.children[i];
     if (section) section.classList.add(`nav-${c}`);
   });
-
+  console.log('Decorated nav:', nav);
   // Remove any extra sections beyond brand + sections (e.g. empty nav-tools)
   while (nav.children.length > 2) nav.lastElementChild.remove();
 
