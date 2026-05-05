@@ -95,6 +95,8 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
 }
 
 // task 3.4: attach/remove hover handlers for desktop mega menu
+const hoverHandlers = new WeakMap();
+
 function attachHoverHandlers(navDrops) {
   navDrops.forEach((drop) => {
     const megaWrapper = drop.querySelector('.nav-mega-wrapper');
@@ -110,14 +112,14 @@ function attachHoverHandlers(navDrops) {
     const close = (e) => {
       // Suppress close when transitioning between Hotels li and its megaWrapper
       const to = e.relatedTarget;
-      if (to && (to === drop || drop.contains(to) || to === megaWrapper || megaWrapper.contains(to))) return;
+      const inDrop = to && (to === drop || drop.contains(to));
+      const inMega = to && (to === megaWrapper || megaWrapper.contains(to));
+      if (inDrop || inMega) return;
       clearTimeout(closeTimer);
       closeTimer = setTimeout(() => drop.setAttribute('aria-expanded', 'false'), 80);
     };
 
-    // store references so we can remove them later
-    drop._hoverOpen = open; // eslint-disable-line no-param-reassign
-    drop._hoverClose = close; // eslint-disable-line no-param-reassign
+    hoverHandlers.set(drop, { open, close });
 
     drop.addEventListener('mouseenter', open);
     drop.addEventListener('mouseleave', close);
@@ -129,14 +131,15 @@ function attachHoverHandlers(navDrops) {
 function removeHoverHandlers(navDrops) {
   navDrops.forEach((drop) => {
     const megaWrapper = drop.querySelector('.nav-mega-wrapper');
-    if (drop._hoverOpen) {
-      drop.removeEventListener('mouseenter', drop._hoverOpen);
-      if (megaWrapper) megaWrapper.removeEventListener('mouseenter', drop._hoverOpen);
+    const handlers = hoverHandlers.get(drop);
+    if (!handlers) return;
+    drop.removeEventListener('mouseenter', handlers.open);
+    drop.removeEventListener('mouseleave', handlers.close);
+    if (megaWrapper) {
+      megaWrapper.removeEventListener('mouseenter', handlers.open);
+      megaWrapper.removeEventListener('mouseleave', handlers.close);
     }
-    if (drop._hoverClose) {
-      drop.removeEventListener('mouseleave', drop._hoverClose);
-      if (megaWrapper) megaWrapper.removeEventListener('mouseleave', drop._hoverClose);
-    }
+    hoverHandlers.delete(drop);
   });
 }
 
@@ -210,8 +213,7 @@ export default async function decorate(block) {
 
     const navItems = navSections.querySelectorAll(':scope .default-content-wrapper > ul > li:not(.nav-home)');
 
-    navItems.forEach((navSection, index) => {
-
+    navItems.forEach((navSection) => {
       if (navSection.querySelector('ul')) navSection.classList.add('nav-drop');
 
       // touch to expand/collapse on mobile; hover handled separately for desktop

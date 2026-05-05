@@ -8,7 +8,7 @@ header {
 header .nav-wrapper {
   background-color: var(--background-color);
   width: 100%;
-  box-shadow: 0 8px 24px rgba(149, 157, 165, .2);
+  box-shadow: 0 8px 24px rgb(149 157 165 / 20%);
 }
 
 header nav {
@@ -136,6 +136,7 @@ header nav .nav-sections {
   top: var(--nav-height);
   left: 0;
   right: 0;
+
   /* height: calc(100dvh - var(--nav-height)); */
   overflow-y: auto;
   scrollbar-width: none;
@@ -161,7 +162,7 @@ header nav[aria-expanded='true'] .nav-sections {
 header nav .nav-sections ul {
   list-style: none;
   padding-left: 0;
-  font-family: 'Calibre', Arial, sans-serif;
+  font-family: Calibre, Arial, sans-serif;
   font-size: 15px;
   font-weight: 300;
   letter-spacing: 0.6px;
@@ -171,7 +172,7 @@ header nav .nav-sections ul {
 header nav .nav-sections ul > li {
   font-weight: 400;
   padding: 12.5px 0;
-  border-bottom: 1px solid rgba(36, 47, 58, 0.1);
+  border-bottom: 1px solid rgb(36 47 58 / 10%);
   font-size: 15px;
   line-height: 25px;
   letter-spacing: 0.6px;
@@ -260,10 +261,6 @@ header nav .nav-sections ul > li > .nav-mega-wrapper > ul > li {
     cursor: pointer;
     display: flex;
     align-items: center;
-  }
-
-  /* hover colour on top-level nav items */
-  header nav .nav-sections .default-content-wrapper > ul > li {
     transition: color 0.2s ease;
   }
 
@@ -335,10 +332,7 @@ header nav .nav-sections ul > li > .nav-mega-wrapper > ul > li {
 /* task 2.7: overlay */
 header .nav-overlay {
   position: fixed;
-  top: var(--nav-height);
-  left: 0;
-  right: 0;
-  bottom: 0;
+  inset: var(--nav-height) 0 0;
   background: rgb(0 0 0 / 50%);
   z-index: 1;
   display: none;
