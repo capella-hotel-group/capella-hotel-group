@@ -2,6 +2,10 @@ import { moveInstrumentation } from '../../scripts/scripts.js';
 
 const ANIM_DURATION = 900;
 
+function easeOut(t) {
+  return 1 - (1 - t) ** 3;
+}
+
 function rowType(row) {
   if (row.dataset.aueModel === 'promo-showcase-tab') return 'tab';
   if (row.dataset.aueModel === 'promo-showcase-share-icon') return 'icon';
@@ -59,6 +63,10 @@ export default function decorate(block) {
   const panelsEl = document.createElement('div');
   panelsEl.className = 'ps-panels';
 
+  // ── Single shared social bar ─────────────────────────────────────────────────
+  const socialEl = document.createElement('div');
+  socialEl.className = 'ps-social';
+
   // ── Image stack ──────────────────────────────────────────────────────────────
   const imageStack = document.createElement('div');
   imageStack.className = 'ps-image-stack';
@@ -105,25 +113,21 @@ export default function decorate(block) {
 
     panel.append(brandTitle, desc);
 
-    if (tab.icons.length > 0) {
-      const socialEl = document.createElement('div');
-      socialEl.className = 'ps-social';
-      tab.icons.forEach(({ row: iconRow, icon, url, name }) => {
-        const a = document.createElement('a');
-        a.className = 'ps-social-link';
-        a.href = url;
-        a.target = '_blank';
-        a.rel = 'noopener noreferrer';
-        if (name) a.setAttribute('aria-label', name);
-        if (icon) a.append(icon);
-        moveInstrumentation(iconRow, a);
-        socialEl.append(a);
-      });
-      panel.append(socialEl);
-    }
-
     panelsEl.append(panel);
     panelEls.push(panel);
+
+    // Add all icons from this tab into the shared social bar
+    tab.icons.forEach(({ row: iconRow, icon, url, name }) => {
+      const a = document.createElement('a');
+      a.className = 'ps-social-link';
+      a.href = url;
+      a.target = '_blank';
+      a.rel = 'noopener noreferrer';
+      if (name) a.setAttribute('aria-label', name);
+      if (icon) a.append(icon);
+      moveInstrumentation(iconRow, a);
+      socialEl.append(a);
+    });
 
     // Image slide (stacked absolutely inside image-stack)
     const slide = document.createElement('div');
@@ -134,46 +138,107 @@ export default function decorate(block) {
     imageEls.push(slide);
   });
 
-  // Set initial active state before inserting into DOM (no transition on load)
+  // Set initial active state before inserting into DOM
   tabBtns[0].classList.add('ps-tab--active');
   panelEls[0].classList.add('ps-panel--active');
-  imageEls[0].classList.add('ps-image-slide--active');
+
+  // ── RAF image animation ───────────────────────────────────────────────────────
+  // clip% per slide: 0 = fully visible, 100 = fully hidden
+  const clipPct = tabs.map((_, i) => (i === 0 ? 0 : 100));
+
+  function applyClip(idx, pct) {
+    clipPct[idx] = pct;
+    imageEls[idx].style.clipPath = `inset(0 ${pct}% 0 0)`;
+  }
+
+  // Initialise inline styles (no CSS transition needed)
+  imageEls.forEach((el, i) => {
+    applyClip(i, clipPct[i]);
+    el.style.zIndex = i === 0 ? 2 : 1;
+  });
+
+  let rafId = null;
+  // fgIdx: slide currently on top (z=2) and tweening. -1 = no animation running.
+  // activeIdx: the "base" slide — always clip=0, z=1, never touched by tween.
+  let activeIdx = 0;
+  let fgIdx = -1;
+  let fgTarget = 0;   // 0 = expanding (clip→0), 100 = collapsing (clip→100)
+  let tweenFromClip = 100;
+  let tweenStart = 0;
+
+  function tick(now) {
+    const t = Math.min(1, (now - tweenStart) / ANIM_DURATION);
+    const pct = tweenFromClip + (fgTarget - tweenFromClip) * easeOut(t);
+    applyClip(fgIdx, pct);
+
+    if (t < 1) {
+      rafId = requestAnimationFrame(tick);
+      return;
+    }
+
+    rafId = null;
+
+    if (fgTarget === 0) {
+      // fg fully expanded → promote to new bg, hide old bg
+      applyClip(activeIdx, 100);
+      imageEls[activeIdx].style.zIndex = 1;
+      activeIdx = fgIdx;
+      imageEls[activeIdx].style.zIndex = 1;
+      fgIdx = -1;
+    } else {
+      // fg fully collapsed → hide it, active bg unchanged
+      imageEls[fgIdx].style.zIndex = 1;
+      fgIdx = -1;
+    }
+  }
 
   // ── Tab switching ─────────────────────────────────────────────────────────────
-  let leaveTimer = null;
-
   function activate(newIdx) {
-    const oldIdx = tabBtns.findIndex((b) => b.classList.contains('ps-tab--active'));
-    if (oldIdx === newIdx) return;
-
-    // Update tab buttons
     tabBtns.forEach((b, i) => {
       b.classList.toggle('ps-tab--active', i === newIdx);
       b.setAttribute('aria-selected', String(i === newIdx));
     });
-
-    // Swap text panels (fade)
     panelEls.forEach((p, i) => p.classList.toggle('ps-panel--active', i === newIdx));
 
-    // Image: keep old slide visible and behind (--leaving), expand new on top
-    clearTimeout(leaveTimer);
+    if (newIdx === activeIdx && fgIdx === -1) return;
 
-    // Clear any stale --leaving state from a previous rapid switch
-    imageEls.forEach((el, i) => {
-      if (i !== oldIdx) el.classList.remove('ps-image-slide--leaving');
-    });
-
-    if (oldIdx !== -1) {
-      imageEls[oldIdx].classList.remove('ps-image-slide--active');
-      imageEls[oldIdx].classList.add('ps-image-slide--leaving');
+    if (fgIdx === newIdx) {
+      // Same fg slide — reverse toward expand
+      tweenFromClip = clipPct[fgIdx];
+      fgTarget = 0;
+      tweenStart = performance.now();
+      if (!rafId) rafId = requestAnimationFrame(tick);
+      return;
     }
 
-    imageEls[newIdx].classList.add('ps-image-slide--active');
+    if (newIdx === activeIdx) {
+      // Going back to bg while fg is open — collapse fg
+      tweenFromClip = clipPct[fgIdx];
+      fgTarget = 100;
+      tweenStart = performance.now();
+      if (!rafId) rafId = requestAnimationFrame(tick);
+      return;
+    }
 
-    // After animation, reset old slide to hidden (it's fully covered, so invisible)
-    leaveTimer = setTimeout(() => {
-      if (oldIdx !== -1) imageEls[oldIdx].classList.remove('ps-image-slide--leaving');
-    }, ANIM_DURATION + 50);
+    // Different slide — snap any current fg away (rare: >2 tabs), start fresh
+    if (fgIdx !== -1) {
+      if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
+      applyClip(fgIdx, 100);
+      imageEls[fgIdx].style.zIndex = 1;
+      fgIdx = -1;
+    }
+
+    // Ensure bg is correct
+    applyClip(activeIdx, 0);
+    imageEls[activeIdx].style.zIndex = 1;
+
+    // Start fg
+    fgIdx = newIdx;
+    imageEls[fgIdx].style.zIndex = 2;
+    tweenFromClip = clipPct[fgIdx];
+    fgTarget = 0;
+    tweenStart = performance.now();
+    rafId = requestAnimationFrame(tick);
   }
 
   tabBar.addEventListener('click', (e) => {
@@ -184,7 +249,7 @@ export default function decorate(block) {
 
   const leftCol = document.createElement('div');
   leftCol.className = 'ps-left';
-  leftCol.append(titleEl, tabBar, panelsEl);
+  leftCol.append(titleEl, tabBar, panelsEl, socialEl);
 
   block.replaceChildren(leftCol, imageStack);
 }

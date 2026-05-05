@@ -1,9 +1,11 @@
 /* ── Promo Showcase ───────────────────────────────────────────────────────── */
 
+main .section:has(.promo-showcase) > div {
+  padding: 0;
+}
+
 .promo-showcase {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 80px 40px 0;
+  padding: 0;
 }
 
 /* ── Block title (scoped) ── */
@@ -49,14 +51,18 @@
   opacity: 1;
 }
 
-.promo-showcase .ps-tab picture,
-.promo-showcase .ps-tab img {
-  max-height: 90px;
-  max-width: 220px;
-  width: auto;
-  height: auto;
+.promo-showcase .ps-tab picture {
   display: block;
+  width: 220px;
+  height: 90px;
+}
+
+.promo-showcase .ps-tab img {
+  width: 100%;
+  height: 100%;
   object-fit: contain;
+  object-position: center;
+  display: block;
 }
 
 .promo-showcase .ps-tab-divider {
@@ -73,6 +79,7 @@
 .promo-showcase .ps-panels {
   display: grid;
   margin-bottom: 48px;
+  padding-left: 8vw;
 }
 
 .promo-showcase .ps-panel {
@@ -117,6 +124,7 @@
   display: flex;
   align-items: center;
   gap: 20px;
+  padding-left: 8vw;
 }
 
 .promo-showcase .ps-social-link {
@@ -150,30 +158,11 @@
   overflow: hidden;
 }
 
-/* All slides: stacked, initially hidden (clipped from right) */
+/* Slides: stacked, clip-path driven by JS RAF tween via inline style */
 .promo-showcase .ps-image-slide {
   position: absolute;
   inset: 0;
   z-index: 1;
-  clip-path: inset(0 100% 0 0);
-  transition: clip-path 0.9s cubic-bezier(0.76, 0, 0.24, 1);
-}
-
-/* Active slide: expand to full width, sit on top */
-.promo-showcase .ps-image-slide--active {
-  clip-path: inset(0 0% 0 0);
-  z-index: 2;
-}
-
-/*
- * Leaving slide: keep visible (stays behind expanding active slide).
- * No transition so it doesn't animate while being covered.
- * Removed by JS after ANIM_DURATION.
- */
-.promo-showcase .ps-image-slide--leaving {
-  clip-path: inset(0 0% 0 0) !important;
-  z-index: 1;
-  transition: none !important;
 }
 
 .promo-showcase .ps-image-slide picture {
@@ -201,35 +190,56 @@
   .promo-showcase .ps-left {
     flex: 5;
     min-width: 0;
-    padding: 80px 48px 80px 40px;
+    min-height: 100vh;
+    padding: 0 14.427vw 7.8vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 
   .promo-showcase .ps-tabs {
     margin-bottom: 0;
+    max-width: 40vw;
   }
 
   .promo-showcase .ps-panels {
     margin-bottom: 0;
     padding-top: 48px;
+    padding-left: 7.8vw;
+  }
+
+  .promo-showcase .ps-social {
+    padding-left: 7.8vw;
   }
 
   .promo-showcase .ps-image-stack {
-    flex: 7;
+    flex: none;
     aspect-ratio: unset;
     margin: 0;
-    width: auto;
-    align-self: stretch;
-    min-height: 480px;
+    width: 42.2vw;
+    max-width: 810px;
+    height: 1336px;
+    max-height: 100vh;
+    align-self: flex-start;
+  }
+}
+
+@media (width >= 1280px) {
+  .promo-showcase .ps-tabs {
+    max-width: 30vw;
+  }
+}
+
+@media (width >= 1024px) {
+  .promo-showcase .ps-panels,
+  .promo-showcase .ps-social {
+    padding-left: 4.16vw;
   }
 }
 
 /* ── Mobile ── */
 
 @media (width <= 767px) {
-  .promo-showcase {
-    padding: 48px 20px 0;
-  }
-
   .promo-showcase .ps-title {
     margin-bottom: 40px;
   }
@@ -238,10 +248,14 @@
     padding: 20px 16px;
   }
 
-  .promo-showcase .ps-tab picture,
+  .promo-showcase .ps-tab picture {
+    width: 130px;
+    height: 60px;
+  }
+
   .promo-showcase .ps-tab img {
-    max-height: 60px;
-    max-width: 130px;
+    width: 100%;
+    height: 100%;
   }
 
   .promo-showcase .ps-panels {
