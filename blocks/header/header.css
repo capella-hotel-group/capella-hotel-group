@@ -48,6 +48,10 @@ header nav[aria-expanded='true'] {
     padding: 0 32px;
   }
 
+  header nav::before {
+    display: none;
+  }
+
   header nav .nav-sections {
     margin-left: auto;
   }
@@ -197,20 +201,28 @@ header nav .nav-sections ul > li > .nav-mega-wrapper > ul > li {
 
 @media (width >= 900px) {
   header nav .nav-sections {
+    position: static;
+    transform: none;
+    visibility: visible;
+    height: auto;
+    overflow: visible;
     display: flex;
     justify-content: flex-end;
     align-self: stretch;
-    visibility: visible;
     white-space: nowrap;
     max-height: none;
-    overflow: visible;
     transition: none;
     align-items: stretch;
+    padding: 0;
+    background-color: transparent;
+    z-index: auto;
   }
 
   header nav[aria-expanded='true'] .nav-sections {
     align-self: unset;
     overflow: visible;
+    transform: none;
+    visibility: visible;
   }
 
   header nav .nav-sections ul {
@@ -225,8 +237,13 @@ header nav .nav-sections ul > li > .nav-mega-wrapper > ul > li {
   }
 
   /* task 2.3: hide Home on desktop */
-  header nav .nav-sections .nav-home {
+  header nav .nav-sections .default-content-wrapper > ul > li.nav-home {
     display: none;
+  }
+
+  /* reset Hotels (nav-drop) color to match other items on desktop */
+  header nav .nav-sections ul > li.nav-drop {
+    color: inherit;
   }
 
   header nav .nav-sections .default-content-wrapper {
