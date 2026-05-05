@@ -232,10 +232,10 @@ export default async function decorate(block) {
   navChevron.innerHTML = '<button type="button" aria-label="Close navigation"><img src="/icons/icon-chevron-down.svg" alt="" /></button>';
   navChevron.addEventListener('touchend', (e) => {
     e.preventDefault();
-    toggleMenu(nav, navSections, true);
+    toggleMenu(nav, navSections, false);
   });
   navChevron.addEventListener('click', () => {
-    toggleMenu(nav, navSections, true);
+    toggleMenu(nav, navSections, false);
   });
   if (navSections) navSections.append(navChevron);
   else nav.append(navChevron);
