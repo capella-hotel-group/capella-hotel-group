@@ -144,6 +144,14 @@ export default function decorate(block) {
   // Hide inactive panels immediately (no animation on load)
   panelEls.forEach((p, i) => { if (i !== 0) p.classList.add('ps-panel--hidden'); });
 
+  // ResizeObserver keeps container height in sync with the active panel's content
+  // (handles init, font-load, and window resize reliably)
+  let observedPanelIdx = 0;
+  const panelObserver = new ResizeObserver(() => {
+    panelsEl.style.height = `${panelEls[observedPanelIdx].scrollHeight}px`;
+  });
+  panelObserver.observe(panelEls[0]);
+
   // ── RAF image animation ───────────────────────────────────────────────────────
   // clip% per slide: 0 = fully visible, 100 = fully hidden
   const clipPct = tabs.map((_, i) => (i === 0 ? 0 : 100));
@@ -195,20 +203,10 @@ export default function decorate(block) {
   }
 
   // Panel animation timings (ms)
-  const FADE_MS = 300;
-  const mobileQuery = window.matchMedia('(width <= 767px)');
+  const FADE_MS = 600;
 
   let panelTimer1 = null;
   let panelTimer2 = null;
-  let panelTimer3 = null;
-
-  function setPanelHeight(idx) {
-    if (!mobileQuery.matches) {
-      panelsEl.style.height = '';
-      return;
-    }
-    panelsEl.style.height = `${panelEls[idx].scrollHeight}px`;
-  }
 
   // ── Tab switching ─────────────────────────────────────────────────────────────
   function activate(newIdx) {
@@ -221,27 +219,28 @@ export default function decorate(block) {
       b.setAttribute('aria-selected', String(i === newIdx));
     });
 
-    // Cancel any in-flight panel sequence
+    // Cancel any in-flight sequence
     clearTimeout(panelTimer1);
     clearTimeout(panelTimer2);
-    clearTimeout(panelTimer3);
 
-    // Step 1: fade out current panel
-    panelEls[oldIdx].classList.remove('ps-panel--active'); // opacity → 0
+    // Step 1: fade out old panel
+    panelEls[oldIdx].classList.remove('ps-panel--active');
 
     panelTimer1 = setTimeout(() => {
-      // Step 2: hide old, show new at opacity 0
+      // Step 2: hide old, update height, show + fade in new
       panelEls[oldIdx].classList.add('ps-panel--hidden');
-      panelEls[newIdx].classList.remove('ps-panel--hidden');
-      panelEls[newIdx].getBoundingClientRect(); // flush
+      panelObserver.unobserve(panelEls[oldIdx]);
 
-      // Step 3: update panel container height
-      setPanelHeight(newIdx);
+      panelEls[newIdx].classList.remove('ps-panel--hidden');
+      panelsEl.style.height = `${panelEls[newIdx].scrollHeight}px`;
+      panelEls[newIdx].getBoundingClientRect(); // force reflow
+
+      panelObserver.observe(panelEls[newIdx]);
+      observedPanelIdx = newIdx;
 
       panelTimer2 = setTimeout(() => {
-        // Step 4: fade in new panel
         panelEls[newIdx].classList.add('ps-panel--active');
-      }, 50); // small pause for height transition to start
+      }, 16); // 1 frame to ensure transition fires
     }, FADE_MS);
 
     if (fgIdx === newIdx) {
