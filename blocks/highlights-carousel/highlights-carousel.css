@@ -12,7 +12,7 @@
 
 .cc-block-title {
     font-family: Goudy, sans-serif;
-    font-weight: 400;
+    font-weight: 300;
     font-size: 40px;
     color: rgb(36 47 58);
     line-height: 1;
@@ -273,6 +273,22 @@
 }
 
 /* ── Responsive ── */
+
+@media (width >= 1440px) {
+    .cc-block-title {
+        font-size: 50px;
+    }
+
+    .cc-card-body h3 {
+        font-size: 30px;
+        line-height: 1.2;
+    }
+
+    .cc-card-body p {
+        font-size: 17px;
+        line-height: 1.6;
+    }
+}
 
 @media (width < 600px) {
     .highlights-carousel {
