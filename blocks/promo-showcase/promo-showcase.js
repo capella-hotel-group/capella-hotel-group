@@ -141,6 +141,8 @@ export default function decorate(block) {
   // Set initial active state before inserting into DOM
   tabBtns[0].classList.add('ps-tab--active');
   panelEls[0].classList.add('ps-panel--active');
+  // Hide inactive panels immediately (no animation on load)
+  panelEls.forEach((p, i) => { if (i !== 0) p.classList.add('ps-panel--hidden'); });
 
   // ── RAF image animation ───────────────────────────────────────────────────────
   // clip% per slide: 0 = fully visible, 100 = fully hidden
@@ -192,15 +194,55 @@ export default function decorate(block) {
     }
   }
 
+  // Panel animation timings (ms)
+  const FADE_MS = 300;
+  const mobileQuery = window.matchMedia('(width <= 767px)');
+
+  let panelTimer1 = null;
+  let panelTimer2 = null;
+  let panelTimer3 = null;
+
+  function setPanelHeight(idx) {
+    if (!mobileQuery.matches) {
+      panelsEl.style.height = '';
+      return;
+    }
+    panelsEl.style.height = `${panelEls[idx].scrollHeight}px`;
+  }
+
   // ── Tab switching ─────────────────────────────────────────────────────────────
   function activate(newIdx) {
+    const oldIdx = tabBtns.findIndex((b) => b.classList.contains('ps-tab--active'));
+    if (oldIdx === newIdx) return;
+
+    // Update tab buttons immediately
     tabBtns.forEach((b, i) => {
       b.classList.toggle('ps-tab--active', i === newIdx);
       b.setAttribute('aria-selected', String(i === newIdx));
     });
-    panelEls.forEach((p, i) => p.classList.toggle('ps-panel--active', i === newIdx));
 
-    if (newIdx === activeIdx && fgIdx === -1) return;
+    // Cancel any in-flight panel sequence
+    clearTimeout(panelTimer1);
+    clearTimeout(panelTimer2);
+    clearTimeout(panelTimer3);
+
+    // Step 1: fade out current panel
+    panelEls[oldIdx].classList.remove('ps-panel--active'); // opacity → 0
+
+    panelTimer1 = setTimeout(() => {
+      // Step 2: hide old, show new at opacity 0
+      panelEls[oldIdx].classList.add('ps-panel--hidden');
+      panelEls[newIdx].classList.remove('ps-panel--hidden');
+      panelEls[newIdx].getBoundingClientRect(); // flush
+
+      // Step 3: update panel container height
+      setPanelHeight(newIdx);
+
+      panelTimer2 = setTimeout(() => {
+        // Step 4: fade in new panel
+        panelEls[newIdx].classList.add('ps-panel--active');
+      }, 50); // small pause for height transition to start
+    }, FADE_MS);
 
     if (fgIdx === newIdx) {
       // Same fg slide — reverse toward expand
