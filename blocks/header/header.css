@@ -172,19 +172,24 @@ header nav .nav-sections ul {
 header nav .nav-sections ul > li {
   font-weight: 400;
   padding: 12.5px 0;
-  border-bottom: 1px solid rgb(36 47 58 / 10%);
   font-size: 15px;
   line-height: 25px;
   letter-spacing: 0.6px;
   color: #000;
 }
 
-header nav .nav-sections ul > li.nav-drop {
-  color: #8c8985;
+@media (width < 900px) {
+  header nav .nav-sections ul > li {
+    border-bottom: 1px solid rgb(36 47 58 / 10%);
+  }
+
+  header nav .nav-sections ul > li:last-child {
+    border-bottom: none;
+  }
 }
 
-header nav .nav-sections ul > li:last-child {
-  border-bottom: none;
+header nav .nav-sections ul > li.nav-drop {
+  color: #8c8985;
 }
 
 header nav .nav-sections ul > li.nav-home {
