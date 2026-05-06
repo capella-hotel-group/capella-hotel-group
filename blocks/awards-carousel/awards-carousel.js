@@ -194,10 +194,13 @@ export default async function decorate(block) {
   itemRows.forEach((row) => {
     const cells = [...row.children];
 
-    // cell[0] = picture, cell[1] = title, cell[2..] = rich body content
+    // 4 cells: cell[0]=picture, cell[1]=alt, cell[2]=title, cell[3]=body
+    // 3 cells: cell[0]=picture, cell[1]=title, cell[2]=body
+    const has4 = cells.length >= 4;
     const pictureEl = cells[0]?.querySelector('picture');
-    const title = cells[1]?.textContent?.trim() ?? '';
-    const contentCells = cells.slice(2);
+    const altText = has4 ? cells[1]?.textContent?.trim() ?? '' : '';
+    const title = has4 ? cells[2]?.textContent?.trim() ?? '' : cells[1]?.textContent?.trim() ?? '';
+    const contentCells = has4 ? cells.slice(3) : cells.slice(2);
 
     const li = document.createElement('li');
     li.className = 'cc-card-wrapper ac-card-wrapper';
@@ -206,11 +209,16 @@ export default async function decorate(block) {
     const cardEl = document.createElement('div');
     cardEl.className = 'cc-card';
 
-    // Card image
+    // Card image — apply alt text if provided
     const imageDiv = document.createElement('div');
     imageDiv.className = 'cc-card-image ac-card-image';
     if (pictureEl) {
-      imageDiv.append(pictureEl.cloneNode(true));
+      const cloned = pictureEl.cloneNode(true);
+      if (altText) {
+        const img = cloned.querySelector('img');
+        if (img) img.alt = altText;
+      }
+      imageDiv.append(cloned);
     }
 
     // Card body
