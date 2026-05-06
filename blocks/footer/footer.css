@@ -1,20 +1,135 @@
+/* ── Footer ────────────────────────────────────────────────────────────────── */
+
 footer {
-  background-color: var(--light-color);
-  font-size: var(--body-font-size-xs);
+  background-color: #242f3a;
+  color: rgb(255 255 255 / 80%);
 }
 
-footer .footer > div {
-  margin: auto;
-  max-width: 1200px;
-  padding: 40px 24px 24px;
+footer .footer {
+  display: flex;
+  flex-direction: column;
+  padding: 13vw 8.8vw;
 }
 
-footer .footer p {
+/* ── Logo section ── */
+
+footer .footer-logos {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-bottom: 8vw;
+}
+
+footer .footer-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50%;
+  padding: 4.55vw 9.11vw;
+}
+
+footer .footer-logo--patina {
+  border-left: 1px solid rgb(255 255 255 / 25%);
+}
+
+footer .footer-logo picture {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+footer .footer-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: brightness(0) invert(1);
+}
+
+/* ── Nav section ── */
+
+footer .footer-nav {
+  /* width: 50%;
+  margin-left: 4vw; */
+}
+
+footer .footer-nav ul {
+  list-style: none;
   margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3.9vw 0;
 }
+
+footer .footer-nav li {
+  font-family: Calibre, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 300;
+  letter-spacing: 0.05rem;
+  line-height: 1.6;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+footer .footer-nav a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+footer .footer-nav a:hover {
+  color: #fff;
+}
+
+@media (width >= 600px) {
+  .footer .footer-nav ul {
+    flex-flow: row wrap;
+  }
+
+  .footer .footer-nav li {
+    width: 50%;
+  }
+}
+
+/* ── Desktop ≥900px: two-column layout ── */
 
 @media (width >= 900px) {
-  footer .footer > div {
-    padding: 40px 32px 24px;
+  footer .footer {
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 60px 40px;
+  }
+
+  .footer .footer-logos {
+    padding-bottom: 0;
+  }
+
+  footer .footer-logo {
+    padding: 1vw 3.64vw;
+  }
+
+  footer .footer-nav {
+    width: 50%;
+    margin-left: 4vw;
+  }
+
+  footer .footer-nav ul {
+    gap: 1.5vw 0;
+  }
+
+  footer .footer-nav li {
+    font-size: 12px;
+  }
+}
+
+/* ── Wide ≥1440px ── */
+
+@media (width >= 1440px) {
+  footer .footer {
+    padding: 60px 14.427vw;
   }
 }

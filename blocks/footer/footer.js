@@ -11,10 +11,36 @@ export default async function decorate(block) {
   const footerPath = footerMeta ? new URL(footerMeta, window.location).pathname : '/footer';
   const fragment = await loadFragment(footerPath);
 
-  // decorate footer DOM
-  block.textContent = '';
-  const footer = document.createElement('div');
-  while (fragment.firstElementChild) footer.append(fragment.firstElementChild);
+  // Fragment has 2 sections:
+  // Section 1: two <p><picture> logo elements (Capella, Patina)
+  // Section 2: <ul> nav links + copyright as last <li>
+  const sections = [...fragment.children];
+  const logoSection = sections[0];
+  const navSection = sections[1];
 
-  block.append(footer);
+  // Build logos
+  const logosEl = document.createElement('div');
+  logosEl.className = 'footer-logos';
+  const logoPictures = logoSection ? [...logoSection.querySelectorAll('picture')] : [];
+  logoPictures.forEach((picture, i) => {
+    const logoEl = document.createElement('div');
+    logoEl.className = `footer-logo footer-logo--${i === 0 ? 'capella' : 'patina'}`;
+    logoEl.append(picture);
+    logosEl.append(logoEl);
+  });
+
+  // Build nav
+  const navEl = document.createElement('nav');
+  navEl.className = 'footer-nav';
+  const ul = navSection ? navSection.querySelector('ul') : null;
+  if (ul) {
+    // Mark last li as copyright
+    const lastLi = ul.querySelector('li:last-child');
+    if (lastLi) lastLi.classList.add('footer-copyright');
+    navEl.append(ul);
+  }
+
+  // Assemble footer
+  block.textContent = '';
+  block.append(logosEl, navEl);
 }

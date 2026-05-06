@@ -28,7 +28,6 @@
     align-items: center;
     gap: 20px;
     padding: 0 40px 6px;
-    
 }
 
 .highlights-carousel .cc-arrow {
@@ -68,7 +67,7 @@
 
 .cc-arrow--prev .cc-shaft::before,
 .cc-arrow--next .cc-shaft::after {
-    content: '';
+    content: "";
     display: block;
     width: 10px;
     height: 1.2px;
@@ -84,7 +83,7 @@
 }
 
 .cc-arrow--prev .cc-shaft::after {
-    content: '';
+    content: "";
     display: block;
     width: 10px;
     height: 1.2px;
@@ -97,7 +96,7 @@
 }
 
 .cc-arrow--next .cc-shaft::before {
-    content: '';
+    content: "";
     display: block;
     width: 10px;
     height: 1.2px;
@@ -125,7 +124,7 @@
 
 /* Tick: vertical line on the outer edge of the button, slides down on hover */
 .cc-arrow::after {
-    content: '';
+    content: "";
     position: absolute;
     width: 1.2px;
     top: 0;
@@ -322,6 +321,13 @@
 }
 
 /* ── Responsive ── */
+
+@media (width >= 900px) {
+    .highlights-carousel {
+        padding-left: 40px;
+        padding-right: 40px;
+    }
+}
 
 @media (width >= 1440px) {
     .highlights-carousel {
