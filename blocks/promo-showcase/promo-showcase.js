@@ -288,6 +288,69 @@ export default function decorate(block) {
     activate(Number(btn.dataset.idx));
   });
 
+  // ── Scroll parallax ───────────────────────────────────────────────────────────
+  const PARALLAX_RANGE = 15; // % shift each direction
+
+  function updateParallax() {
+    const rect = block.getBoundingClientRect();
+    const vh = window.innerHeight;
+    // 0 when block center is at viewport center (most visible) → offset = 0
+    // shifts ±PARALLAX_RANGE% as block scrolls through viewport
+    const centerOffset = (rect.top + rect.height / 2) - vh / 2;
+    const maxOffset = (vh + rect.height) / 2;
+    const progress = centerOffset / maxOffset; // -1 to +1
+    const clamped = Math.max(-1, Math.min(1, progress));
+    const offset = clamped * PARALLAX_RANGE;
+    imageEls.forEach((slide) => {
+      const img = slide.querySelector('img');
+      if (img) img.style.transform = `translateY(${offset}%)`;
+    });
+  }
+
+  let parallaxRaf = null;
+  const onScroll = () => {
+    if (parallaxRaf) return;
+    parallaxRaf = requestAnimationFrame(() => {
+      updateParallax();
+      parallaxRaf = null;
+    });
+  };
+
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const revealImgs = () => {
+      updateParallax();
+      // Recalc after 300ms for late-settling layouts, then fade in at correct position
+      setTimeout(() => {
+        updateParallax();
+        requestAnimationFrame(() => {
+          imageEls.forEach((slide) => {
+            const img = slide.querySelector('img');
+            if (img) {
+              img.style.transition = 'opacity 0.5s ease';
+              img.style.opacity = '1';
+            }
+          });
+          setTimeout(() => {
+            imageEls.forEach((slide) => {
+              const img = slide.querySelector('img');
+              if (img) img.style.transition = '';
+            });
+          }, 500);
+        });
+      }, 300);
+    };
+
+    // window.load = images/fonts loaded → layout stable
+    // If already complete (e.g. cached page), call immediately
+    if (document.readyState === 'complete') {
+      revealImgs();
+    } else {
+      window.addEventListener('load', revealImgs, { once: true });
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+  }
+
   const leftCol = document.createElement('div');
   leftCol.className = 'ps-left';
   leftCol.append(titleEl, tabBar, panelsEl, socialEl);
