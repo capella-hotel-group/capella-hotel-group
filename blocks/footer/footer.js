@@ -40,7 +40,17 @@ export default async function decorate(block) {
     navEl.append(ul);
   }
 
+  // Scroll-to-top chevron
+  const chevronEl = document.createElement('button');
+  chevronEl.className = 'footer-scroll-top';
+  chevronEl.type = 'button';
+  chevronEl.setAttribute('aria-label', 'Scroll to top');
+  chevronEl.innerHTML = '<img src="/icons/icon-chevron-down.svg" alt="" />';
+  chevronEl.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
   // Assemble footer
   block.textContent = '';
-  block.append(logosEl, navEl);
+  block.append(chevronEl, logosEl, navEl);
 }

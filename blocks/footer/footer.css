@@ -5,7 +5,40 @@ footer {
   color: rgb(255 255 255 / 80%);
 }
 
+/* ── Scroll-to-top chevron ── */
+
+@keyframes footer-chevron-bounce {
+  0% {
+    opacity: 1;
+    transform: translateX(-50%) rotate(180deg) translateY(0);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateX(-50%) rotate(180deg) translateY(12px);
+  }
+}
+
+footer .footer-scroll-top {
+  position: absolute;
+  top: 2.2vw;
+  left: 50%;
+  transform: translateX(-50%) rotate(180deg);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  animation: footer-chevron-bounce 1s ease-out infinite;
+}
+
+footer .footer-scroll-top img {
+  width: 32px;
+  display: block;
+  filter: brightness(0) invert(1);
+}
+
 footer .footer {
+  position: relative;
   display: flex;
   flex-direction: column;
   padding: 13vw 8.8vw;
@@ -98,6 +131,10 @@ footer .footer-nav a:hover {
 /* ── Desktop ≥900px: two-column layout ── */
 
 @media (width >= 900px) {
+  footer .footer-scroll-top {
+    top: 1.5vw;
+  }
+
   footer .footer {
     flex-direction: row;
     align-items: flex-start;
@@ -130,6 +167,6 @@ footer .footer-nav a:hover {
 
 @media (width >= 1440px) {
   footer .footer {
-    padding: 60px 14.427vw;
+    padding: 5vw 14.427vw;
   }
 }
