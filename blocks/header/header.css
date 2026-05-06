@@ -18,7 +18,7 @@ header nav {
   align-items: center;
   gap: 0 24px;
   margin: auto;
-  max-width: 1248px;
+  max-width: 1440px;
   height: var(--nav-height);
   padding: 0 24px;
   font-family: var(--body-font-family);
@@ -47,8 +47,7 @@ header nav[aria-expanded='true'] {
     justify-content: space-between;
     align-items: stretch;
     gap: 0 32px;
-    max-width: 1264px;
-    padding: 0 32px;
+    padding: 0 40px;
   }
 
   header nav::before {
