@@ -43,7 +43,9 @@ export default function decorate(block) {
         ?? cells[1]?.textContent?.trim()
         ?? '#';
       const name = cells[2]?.textContent?.trim() ?? '';
-      tabs[tabs.length - 1].icons.push({ row, icon, url, name });
+      tabs[tabs.length - 1].icons.push({
+        row, icon, url, name,
+      });
     }
   });
 
@@ -117,7 +119,9 @@ export default function decorate(block) {
     panelEls.push(panel);
 
     // Add all icons from this tab into the shared social bar
-    tab.icons.forEach(({ row: iconRow, icon, url, name }) => {
+    tab.icons.forEach(({
+      row: iconRow, icon, url, name,
+    }) => {
       const a = document.createElement('a');
       a.className = 'ps-social-link';
       a.href = url;
@@ -172,7 +176,7 @@ export default function decorate(block) {
   // activeIdx: the "base" slide — always clip=0, z=1, never touched by tween.
   let activeIdx = 0;
   let fgIdx = -1;
-  let fgTarget = 0;   // 0 = expanding (clip→0), 100 = collapsing (clip→100)
+  let fgTarget = 0; // 0 = expanding (clip→0), 100 = collapsing (clip→100)
   let tweenFromClip = 100;
   let tweenStart = 0;
 

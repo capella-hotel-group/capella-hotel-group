@@ -161,7 +161,7 @@ main .section:has(.promo-showcase) > div {
 }
 
 .promo-showcase .ps-description {
-  font-family: 'Calibre', Arial, sans-serif;
+  font-family: Calibre, Arial, sans-serif;
   font-size: 15px;
   font-weight: 300;
   line-height: 1.6;
