@@ -1,0 +1,375 @@
+/* ── Promo Showcase ───────────────────────────────────────────────────────── */
+
+main .section:has(.promo-showcase) > div {
+  padding: 0;
+}
+
+.promo-showcase {
+  padding: 0;
+}
+
+/* ── Block title (scoped) ── */
+
+.promo-showcase .ps-title {
+  font-family: Goudy, sans-serif;
+  font-weight: 300;
+  font-size: 30px;
+  color: #242f3a;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  line-height: 1;
+  margin: 0 0 64px;
+  width: 10rem;
+}
+
+/* ── Tab bar ── */
+
+.promo-showcase .ps-tabs {
+  display: flex;
+  align-items: center;
+  margin-bottom: 48px;
+}
+
+.promo-showcase .ps-tab {
+  flex: 1;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 32px 40px;
+  min-height: 120px;
+  display: block;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.25;
+  transition: opacity 0.4s ease;
+}
+
+.promo-showcase .ps-tab:hover {
+  opacity: 0.55;
+}
+
+.promo-showcase .ps-tab--active {
+  opacity: 1;
+}
+
+.promo-showcase .ps-tab picture {
+  display: block;
+  width: 220px;
+  max-width: 100%;
+  height: 90px;
+  max-height: 100%;
+}
+
+.promo-showcase .ps-tab img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  display: block;
+}
+
+.promo-showcase .ps-tab-divider {
+  width: 1px;
+  align-self: stretch;
+  background: rgb(36 47 58);
+  opacity: 0.2;
+  flex-shrink: 0;
+  margin: 8px 0;
+}
+
+/* ── Text panels (CSS grid stack) ── */
+
+.promo-showcase .ps-panels {
+  position: relative;
+  margin-bottom: 48px;
+  overflow: hidden;
+  transition: height 0.3s ease;
+}
+
+.promo-showcase .ps-panel {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding-left: 8vw;
+}
+
+.promo-showcase .ps-panel--hidden {
+  display: none;
+}
+
+.promo-showcase .ps-panel--active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Children start invisible + shifted down */
+.promo-showcase .ps-brand-title,
+.promo-showcase .ps-description > p {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.promo-showcase .ps-brand-title {
+  transform: none;
+  font-family: Goudy, sans-serif;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 1.2;
+  color: #242f3a;
+  margin: 0 0 20px;
+}
+
+.promo-showcase .ps-description {
+  font-family: Calibre, Arial, sans-serif;
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.6;
+  color: #8c8985;
+  max-width: 680px;
+  margin-bottom: 28px;
+}
+
+.promo-showcase .ps-description p {
+  margin: 0 0 12px;
+}
+
+.promo-showcase .ps-description p:last-child {
+  margin-bottom: 0;
+}
+
+@keyframes ps-slide-up {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes ps-fade-in {
+  to {
+    opacity: 1;
+  }
+}
+
+/* Staggered slide-up when panel becomes active */
+.promo-showcase .ps-panel--active .ps-brand-title {
+  animation: ps-fade-in 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.1s forwards;
+}
+
+.promo-showcase .ps-panel--active .ps-description > p:nth-child(1) {
+  animation: ps-slide-up 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.22s forwards;
+}
+
+.promo-showcase .ps-panel--active .ps-description > p:nth-child(2) {
+  animation: ps-slide-up 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.34s forwards;
+}
+
+.promo-showcase .ps-panel--active .ps-description > p:nth-child(3) {
+  animation: ps-slide-up 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.46s forwards;
+}
+
+.promo-showcase .ps-panel--active .ps-description > p:nth-child(4) {
+  animation: ps-slide-up 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.58s forwards;
+}
+
+/* ── Social icons ── */
+
+.promo-showcase .ps-social {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding-left: 8vw;
+}
+
+.promo-showcase .ps-social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.55;
+  transition: opacity 0.2s ease;
+  text-decoration: none;
+}
+
+.promo-showcase .ps-social-link:hover {
+  opacity: 1;
+}
+
+.promo-showcase .ps-social-link picture,
+.promo-showcase .ps-social-link img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  display: block;
+}
+
+/* ── Image stack ── */
+
+.promo-showcase .ps-image-stack {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  margin: 0 -40px;
+  width: calc(100% + 80px);
+  overflow: hidden;
+}
+
+/* Slides: stacked, clip-path driven by JS RAF tween via inline style */
+.promo-showcase .ps-image-slide {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.promo-showcase .ps-image-slide picture {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.promo-showcase .ps-image-slide img {
+  width: 100%;
+  height: 120%; /* oversize for parallax room */
+  position: absolute;
+  top: -10%; /* center vertically */
+  left: 0;
+  object-fit: cover;
+  display: block;
+  will-change: transform;
+  opacity: 0;
+}
+
+/* ── Desktop: 2-column layout ── */
+
+@media (width >= 768px) {
+  .promo-showcase {
+    display: flex;
+    align-items: stretch;
+    padding: 0;
+  }
+
+  .promo-showcase .ps-left {
+    flex: 5;
+    min-width: 0;
+    min-height: 100vh;
+    padding: 0 7.8vw 7.8vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .promo-showcase .ps-title {
+    font-size: 50px;
+  }
+
+  .promo-showcase .ps-brand-title {
+    font-size: 30px;
+  }
+
+  .promo-showcase .ps-description {
+    font-size: 18px;
+  }
+
+  .promo-showcase .ps-tabs {
+    margin-bottom: 0;
+    max-width: 40vw;
+  }
+
+  .promo-showcase .ps-panels {
+    margin-bottom: 0;
+    margin-top: 48px;
+  }
+
+  .promo-showcase .ps-panel {
+    padding-left: 7.8vw;
+  }
+
+  .promo-showcase .ps-social {
+    padding-left: 7.8vw;
+  }
+
+  .promo-showcase .ps-image-stack {
+    flex: none;
+    aspect-ratio: unset;
+    margin: 0;
+    width: 42.2vw;
+    max-width: 810px;
+    height: 1336px;
+    max-height: 100vh;
+    align-self: flex-start;
+  }
+}
+
+@media (width >= 1280px) {
+  .promo-showcase .ps-left {
+    padding: 0 14.427vw 7.8vw;
+  }
+
+  .promo-showcase .ps-tabs {
+    max-width: 30vw;
+  }
+
+  .promo-showcase .ps-tab {
+    padding: 1vw 3.64vw;
+  }
+}
+
+@media (width >= 1024px) {
+  .promo-showcase .ps-title {
+    font-size: 40px;
+  }
+
+  .promo-showcase .ps-brand-title {
+    font-size: 25px;
+  }
+
+  .promo-showcase .ps-description {
+    font-size: 13px;
+  }
+
+  .promo-showcase .ps-panel,
+  .promo-showcase .ps-social {
+    padding-left: 4.16vw;
+  }
+}
+
+/* ── Mobile ── */
+
+@media (width <= 767px) {
+  .promo-showcase .ps-left {
+    padding: 0 32px;
+  }
+
+  .promo-showcase .ps-title {
+    margin-bottom: 40px;
+  }
+
+  .promo-showcase .ps-tab {
+    padding: 20px 16px;
+  }
+
+  .promo-showcase .ps-tab picture {
+    width: 130px;
+    height: 60px;
+  }
+
+  .promo-showcase .ps-tab img {
+    width: 100%;
+    height: 100%;
+  }
+
+  .promo-showcase .ps-panels {
+    margin-bottom: 36px;
+  }
+
+  .promo-showcase .ps-description {
+    max-width: 100%;
+  }
+
+  .promo-showcase .ps-image-stack {
+    aspect-ratio: 4 / 3;
+    margin: 0 -20px;
+    width: calc(100% + 40px);
+  }
+}
