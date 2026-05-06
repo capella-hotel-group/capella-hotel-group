@@ -21,32 +21,7 @@
     padding: 0 0 24px;
 }
 
-@media (width >= 900px) {
-    .awards-carousel .cc-block-title {
-        padding: 0 0 72px;
-    }
-
-    .awards-carousel {
-        padding-left: 40px;
-        padding-right: 40px;
-    }
-}
-
-@media (width >= 1440px) {
-    .awards-carousel .cc-block-title {
-        font-size: 50px;
-    }
-
-    .awards-carousel {
-        max-width: none;
-        padding-left: 14.427vw;
-        padding-right: 14.427vw;
-    }
-}
-
 /* ── Arrows ── */
-
-
 
 .awards-carousel .cc-arrow {
     display: flex;
@@ -82,7 +57,7 @@
 
 .awards-carousel .cc-arrow--prev .cc-shaft::before,
 .awards-carousel .cc-arrow--next .cc-shaft::after {
-    content: '';
+    content: "";
     display: block;
     width: 13px;
     height: 1.2px;
@@ -98,7 +73,7 @@
 }
 
 .awards-carousel .cc-arrow--prev .cc-shaft::after {
-    content: '';
+    content: "";
     display: block;
     width: 13px;
     height: 1.2px;
@@ -111,7 +86,7 @@
 }
 
 .awards-carousel .cc-arrow--next .cc-shaft::before {
-    content: '';
+    content: "";
     display: block;
     width: 13px;
     height: 1.2px;
@@ -324,5 +299,37 @@
 
     .ac-card-body-section p {
         font-size: 15px;
+    }
+}
+
+@media (width >= 900px) {
+    .awards-carousel .cc-block-title {
+        padding: 0 0 72px;
+    }
+
+    .awards-carousel {
+        padding-left: 40px;
+        padding-right: 40px;
+    }
+
+    .awards-carousel .ac-card-body h3 {
+        font-size: 20px;
+    }
+
+    .awards-carousel .ac-card-body-section p {
+        font-size: 17px;
+        line-height: 1.6;
+    }
+}
+
+@media (width >= 1440px) {
+    .awards-carousel .cc-block-title {
+        font-size: 50px;
+    }
+
+    .awards-carousel {
+        max-width: none;
+        padding-left: 14.427vw;
+        padding-right: 14.427vw;
     }
 }
