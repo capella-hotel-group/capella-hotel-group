@@ -282,10 +282,26 @@ export default function decorate(block) {
     rafId = requestAnimationFrame(tick);
   }
 
+  // ── Auto-advance ─────────────────────────────────────────────────────────────
+  const AUTO_INTERVAL = 6000;
+  let autoTimer = null;
+
+  function scheduleAuto() {
+    clearTimeout(autoTimer);
+    autoTimer = setTimeout(() => {
+      const nextIdx = (tabBtns.findIndex((b) => b.classList.contains('ps-tab--active')) + 1) % tabs.length;
+      activate(nextIdx);
+      scheduleAuto();
+    }, AUTO_INTERVAL);
+  }
+
+  scheduleAuto();
+
   tabBar.addEventListener('click', (e) => {
     const btn = e.target.closest('.ps-tab[data-idx]');
     if (!btn) return;
     activate(Number(btn.dataset.idx));
+    scheduleAuto(); // reset timer on manual switch
   });
 
   // ── Scroll parallax ───────────────────────────────────────────────────────────
