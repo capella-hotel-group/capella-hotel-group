@@ -17,7 +17,7 @@
     color: rgb(36 47 58);
     line-height: 1;
     margin: 0;
-    padding: 0 40px;
+    padding: 0;
 }
 
 /* ── Arrows ── */
@@ -27,7 +27,7 @@
     justify-content: flex-end;
     align-items: center;
     gap: 20px;
-    padding: 0 40px 6px;
+    padding: 0 0 6px;
 }
 
 .highlights-carousel .cc-arrow {
