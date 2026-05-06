@@ -149,6 +149,7 @@
 .cc-arrow--prev .cc-shaft {
     transform-origin: right center;
 }
+
 .cc-arrow--next .cc-shaft {
     transform-origin: left center;
 }
