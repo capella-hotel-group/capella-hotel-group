@@ -53,6 +53,10 @@
   src: local('Arial');
 }
 
+* {
+  box-sizing: border-box;
+}
+
 @media (width >= 900px) {
   :root {
     /* body sizes */
