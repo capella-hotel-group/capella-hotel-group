@@ -36,6 +36,12 @@
     .awards-carousel .cc-block-title {
         font-size: 50px;
     }
+
+    .awards-carousel {
+        max-width: none;
+        padding-left: 14.427vw;
+        padding-right: 14.427vw;
+    }
 }
 
 /* ── Arrows ── */

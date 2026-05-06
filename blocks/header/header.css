@@ -64,6 +64,13 @@ header nav[aria-expanded='true'] {
   }
 }
 
+@media (width >= 1440px) {
+  header nav {
+    max-width: none;
+    padding: 0 14.427vw;
+  }
+}
+
 header nav p {
   margin: 0;
 }
