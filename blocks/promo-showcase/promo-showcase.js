@@ -203,7 +203,7 @@ export default function decorate(block) {
   }
 
   // Panel animation timings (ms)
-  const FADE_MS = 600;
+  const FADE_MS = 300;
 
   let panelTimer1 = null;
   let panelTimer2 = null;
