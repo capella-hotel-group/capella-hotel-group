@@ -183,20 +183,13 @@ export default async function decorate(block) {
 
   const cards = [];
 
-  // ── Title row logic (disabled — no title in content yet) ──────────────────
-  // When content has a title row as the first row (single-cell, text only),
-  // uncomment the block below and change `itemRows` to `allRows.slice(1)`.
-  //
-  // const allRows = [...block.children];
-  // const titleRow = allRows[0];
-  // const blockTitle = document.createElement('h2');
-  // blockTitle.className = 'cc-block-title';
-  // blockTitle.textContent = titleRow?.textContent?.trim() ?? '';
-  // block.prepend(blockTitle); // insert before sliderWrapper
-  // const itemRows = allRows.slice(1);
-  // ─────────────────────────────────────────────────────────────────────────
-
-  const itemRows = [...block.children];
+  // ── Title row ────────────────────────────────────────────────────────────────
+  const allRows = [...block.children];
+  const titleRow = allRows[0];
+  const blockTitle = document.createElement('h2');
+  blockTitle.className = 'cc-block-title';
+  blockTitle.textContent = titleRow?.textContent?.trim() ?? '';
+  const itemRows = allRows.slice(1);
 
   itemRows.forEach((row) => {
     const cells = [...row.children];
@@ -267,7 +260,7 @@ export default async function decorate(block) {
   dragInner.innerHTML = '<span class="cc-drag-arrow cc-drag-arrow--left">&#9664;</span><span class="cc-drag-circle">Drag</span><span class="cc-drag-arrow cc-drag-arrow--right">&#9654;</span>';
   dragCursor.append(dragInner);
 
-  block.replaceChildren(sliderWrapper, dragCursor);
+  block.replaceChildren(blockTitle, sliderWrapper, dragCursor);
 
   initCarousel(slider, track, cards, prevBtn, nextBtn, dragCursor, stride);
 }
