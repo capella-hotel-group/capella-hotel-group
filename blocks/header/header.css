@@ -262,13 +262,18 @@ header nav .nav-sections ul > li > .nav-mega-wrapper > ul > li {
 
   header nav .nav-sections ul {
     display: flex;
-    gap: 32px;
+    gap: 45px;
     margin: 0;
     align-items: stretch;
   }
 
   header nav .nav-sections ul > li {
     padding: 0;
+    font-size: 12px;
+    font-weight: 300;
+    letter-spacing: 0.8px;
+    line-height: 1.6;
+    color: #000;
   }
 
   /* task 2.3: hide Home on desktop */
@@ -332,10 +337,10 @@ header nav .nav-sections ul > li > .nav-mega-wrapper > ul > li {
   header nav .nav-sections .default-content-wrapper > ul > li > .nav-mega-wrapper > ul > li {
     padding: 0 35px;
     font-family: Goudy, serif;
-    font-size: 15px;
-    font-weight: 400;
-    line-height: 18px;
-    letter-spacing: 1.4px;
+    font-size: 12px;
+    font-weight: 300;
+    line-height: 1.6;
+    letter-spacing: 0.8px;
     text-transform: none;
     color: rgb(239 239 239);
   }
@@ -347,10 +352,10 @@ header nav .nav-sections ul > li > .nav-mega-wrapper > ul > li {
   header nav .nav-sections .default-content-wrapper > ul > li > .nav-mega-wrapper > ul > li a {
     color: rgb(239 239 239);
     font-family: Goudy, serif;
-    font-size: 15px;
+    font-size: 12px;
     font-weight: 400;
-    line-height: 18px;
-    letter-spacing: 1.4px;
+    line-height: 1.6;
+    letter-spacing: 0.8px;
     text-transform: none;
     transition: color 0.2s ease;
   }
