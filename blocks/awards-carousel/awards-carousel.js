@@ -183,6 +183,19 @@ export default async function decorate(block) {
 
   const cards = [];
 
+  // ── Title row logic (disabled — no title in content yet) ──────────────────
+  // When content has a title row as the first row (single-cell, text only),
+  // uncomment the block below and change `itemRows` to `allRows.slice(1)`.
+  //
+  // const allRows = [...block.children];
+  // const titleRow = allRows[0];
+  // const blockTitle = document.createElement('h2');
+  // blockTitle.className = 'cc-block-title';
+  // blockTitle.textContent = titleRow?.textContent?.trim() ?? '';
+  // block.prepend(blockTitle); // insert before sliderWrapper
+  // const itemRows = allRows.slice(1);
+  // ─────────────────────────────────────────────────────────────────────────
+
   const itemRows = [...block.children];
 
   itemRows.forEach((row) => {
