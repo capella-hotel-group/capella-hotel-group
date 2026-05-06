@@ -28,18 +28,21 @@
     align-items: center;
     gap: 20px;
     padding: 0 40px 24px;
+    
 }
 
-.cc-arrow {
+.highlights-carousel .cc-arrow {
     display: flex;
     align-items: center;
     justify-content: center;
     background: none;
     border: none;
     cursor: pointer;
-    padding: 8px;
+    padding: 5px 8px;
     opacity: 1;
+    position: relative;
     transition: opacity 0.3s ease;
+    border-radius: 0;
 }
 
 .cc-arrow[disabled] {
@@ -60,13 +63,14 @@
     height: 1.2px;
     background: rgb(152 145 143);
     position: relative;
+    transition: transform 0.3s ease;
 }
 
 .cc-arrow--prev .cc-shaft::before,
 .cc-arrow--next .cc-shaft::after {
     content: '';
     display: block;
-    width: 13px;
+    width: 10px;
     height: 1.2px;
     background: rgb(152 145 143);
     position: absolute;
@@ -82,7 +86,7 @@
 .cc-arrow--prev .cc-shaft::after {
     content: '';
     display: block;
-    width: 13px;
+    width: 10px;
     height: 1.2px;
     background: rgb(152 145 143);
     position: absolute;
@@ -95,7 +99,7 @@
 .cc-arrow--next .cc-shaft::before {
     content: '';
     display: block;
-    width: 13px;
+    width: 10px;
     height: 1.2px;
     background: rgb(152 145 143);
     position: absolute;
@@ -115,6 +119,50 @@
 .cc-no-scroll ~ .cc-arrows,
 .highlights-carousel:has(.cc-no-scroll) .cc-arrows {
     display: none;
+}
+
+/* ── Arrow hover animation ── */
+
+/* Tick: vertical line on the outer edge of the button, slides down on hover */
+.cc-arrow::after {
+    content: '';
+    position: absolute;
+    width: 1.2px;
+    top: 0;
+    bottom: 0;
+    background: rgb(152 145 143);
+    transform: scaleY(0);
+    transform-origin: top center;
+    transition: transform 0.3s ease;
+}
+
+/* Prev (←): tick at left edge of button (arrowhead side) */
+.cc-arrow--prev::after {
+    left: 0;
+}
+
+/* Next (→): tick at right edge of button (arrowhead side) */
+.cc-arrow--next::after {
+    right: 0;
+}
+
+.cc-arrow--prev .cc-shaft {
+    transform-origin: right center;
+}
+.cc-arrow--next .cc-shaft {
+    transform-origin: left center;
+}
+
+.cc-arrow--prev:not([disabled]):hover .cc-shaft {
+    transform: scaleX(0.9);
+}
+
+.cc-arrow--next:not([disabled]):hover .cc-shaft {
+    transform: scaleX(0.9);
+}
+
+.cc-arrow:not([disabled]):hover::after {
+    transform: scaleY(1);
 }
 
 /* ── Slider / Track ── */
