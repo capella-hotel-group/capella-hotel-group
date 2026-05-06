@@ -66,7 +66,7 @@ footer .footer-nav ul {
 }
 
 footer .footer-nav li {
-  font-family: "Calibre", Arial, sans-serif;
+  font-family: Calibre, Arial, sans-serif;
   font-size: 14px;
   font-weight: 300;
   letter-spacing: 0.05rem;
@@ -87,8 +87,7 @@ footer .footer-nav a:hover {
 
 @media (width >= 600px) {
   .footer .footer-nav ul {
-    flex-direction: row;
-    flex-wrap: wrap;
+    flex-flow: row wrap;
   }
 
   .footer .footer-nav li {
