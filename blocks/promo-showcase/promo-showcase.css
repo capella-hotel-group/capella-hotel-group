@@ -115,6 +115,30 @@ main .section:has(.promo-showcase) > div {
 
 .promo-showcase .ps-brand-title {
   transform: none;
+  font-family: Goudy, sans-serif;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 1.2;
+  color: #242f3a;
+  margin: 0 0 20px;
+}
+
+.promo-showcase .ps-description {
+  font-family: Calibre, Arial, sans-serif;
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.6;
+  color: #8c8985;
+  max-width: 680px;
+  margin-bottom: 28px;
+}
+
+.promo-showcase .ps-description p {
+  margin: 0 0 12px;
+}
+
+.promo-showcase .ps-description p:last-child {
+  margin-bottom: 0;
 }
 
 @keyframes ps-slide-up {
@@ -149,33 +173,6 @@ main .section:has(.promo-showcase) > div {
 
 .promo-showcase .ps-panel--active .ps-description > p:nth-child(4) {
   animation: ps-slide-up 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.58s forwards;
-}
-
-.promo-showcase .ps-brand-title {
-  font-family: Goudy, sans-serif;
-  font-weight: 400;
-  font-size: 20px;
-  line-height: 1.2;
-  color: #242f3a;
-  margin: 0 0 20px;
-}
-
-.promo-showcase .ps-description {
-  font-family: Calibre, Arial, sans-serif;
-  font-size: 15px;
-  font-weight: 300;
-  line-height: 1.6;
-  color: #8c8985;
-  max-width: 680px;
-  margin-bottom: 28px;
-}
-
-.promo-showcase .ps-description p {
-  margin: 0 0 12px;
-}
-
-.promo-showcase .ps-description p:last-child {
-  margin-bottom: 0;
 }
 
 /* ── Social icons ── */
