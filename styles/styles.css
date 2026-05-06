@@ -37,7 +37,7 @@
   --heading-font-size-xs: 22px;
 
   /* nav height */
-  --nav-height: 64px;
+  --nav-height: 50px;
 }
 
 /* fallback fonts */
@@ -51,6 +51,10 @@
   font-family: roboto-fallback;
   size-adjust: 99.529%;
   src: local('Arial');
+}
+
+* {
+  box-sizing: border-box;
 }
 
 @media (width >= 900px) {

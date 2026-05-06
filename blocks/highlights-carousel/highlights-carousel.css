@@ -169,7 +169,7 @@
 /* ── Slider / Track ── */
 
 .cc-slider-wrapper {
-    padding: 0 40px;
+    padding: 0;
 }
 
 .cc-slider {
@@ -324,8 +324,21 @@
 /* ── Responsive ── */
 
 @media (width >= 1440px) {
+    .highlights-carousel {
+        max-width: none;
+        padding-left: 14.427vw;
+        padding-right: 14.427vw;
+    }
+
     .cc-block-title {
+        padding-left: 0;
+        padding-right: 0;
         font-size: 50px;
+    }
+
+    .cc-arrows {
+        padding-left: 0;
+        padding-right: 0;
     }
 
     .cc-card-body h3 {
@@ -349,7 +362,7 @@
     }
 
     .cc-slider-wrapper {
-        padding: 0 20px;
+        padding: 0;
     }
 
     .hc-card-wrapper {
