@@ -80,6 +80,11 @@ footer .footer-logo img {
   object-fit: cover;
   display: block;
   filter: brightness(0) invert(1);
+  transition: opacity 0.2s ease;
+}
+
+footer .footer-logo:hover img {
+  opacity: 0.5;
 }
 
 /* ── Nav section ── */
@@ -111,11 +116,12 @@ footer .footer-nav li {
 footer .footer-nav a {
   color: inherit;
   text-decoration: none;
-  transition: color 0.2s ease;
+  transition: color 0.2s ease, opacity 0.2s ease;
 }
 
 footer .footer-nav a:hover {
   color: #fff;
+  opacity: 0.5;
 }
 
 @media (width >= 600px) {
@@ -147,6 +153,7 @@ footer .footer-nav a:hover {
 
   footer .footer-logo {
     padding: 1vw 3.64vw;
+    max-width: 14vw;
   }
 
   footer .footer-nav {
