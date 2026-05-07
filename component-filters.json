@@ -23,13 +23,6 @@
     ]
   },
   {
-    "id": "promo-showcase",
-    "components": [
-      "promo-showcase-tab",
-      "promo-showcase-share-icon"
-    ]
-  },
-  {
     "id": "awards-carousel",
     "components": [
       "carousel-cards"
@@ -60,6 +53,13 @@
     "id": "highlights-carousel",
     "components": [
       "carousel-cards"
+    ]
+  },
+  {
+    "id": "promo-showcase",
+    "components": [
+      "promo-showcase-tab",
+      "promo-showcase-share-icon"
     ]
   }
 ]
