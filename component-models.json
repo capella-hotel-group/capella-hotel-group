@@ -36,6 +36,11 @@
         "component": "text",
         "name": "imageAlt",
         "label": "Alt Text"
+      },
+      {
+        "component": "aem-content",
+        "name": "link",
+        "label": "Link"
       }
     ]
   },
