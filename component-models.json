@@ -201,6 +201,84 @@
     ]
   },
   {
+    "id": "hero-banner",
+    "fields": [
+      {
+        "component": "select",
+        "name": "media",
+        "label": "Media Type",
+        "valueType": "string",
+        "multi": false,
+        "required": true,
+        "options": [
+          {
+            "name": "Image",
+            "value": "image"
+          },
+          {
+            "name": "Video",
+            "value": "video"
+          }
+        ]
+      },
+      {
+        "component": "reference",
+        "name": "mediaAsset",
+        "label": "Media Asset",
+        "valueType": "string",
+        "required": true
+      },
+      {
+        "component": "reference",
+        "name": "logo",
+        "label": "Logo",
+        "valueType": "string",
+        "condition": {
+          "===": [
+            {
+              "var": "media"
+            },
+            "image"
+          ]
+        }
+      },
+      {
+        "component": "reference",
+        "name": "mediaAssetMobile",
+        "label": "Media Asset (Mobile Video)",
+        "valueType": "string",
+        "condition": {
+          "===": [
+            {
+              "var": "media"
+            },
+            "video"
+          ]
+        }
+      },
+      {
+        "component": "text",
+        "name": "ctaLabel",
+        "label": "CTA Label",
+        "valueType": "string",
+        "condition": {
+          "===": [
+            {
+              "var": "media"
+            },
+            "video"
+          ]
+        }
+      },
+      {
+        "component": "richtext",
+        "name": "content",
+        "label": "Content",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
     "id": "hero",
     "fields": [
       {
@@ -375,6 +453,73 @@
         "valueType": "string",
         "required": false,
         "placeholder": "e.g. Instagram"
+      }
+    ]
+  },
+  {
+    "id": "text-with-image",
+    "fields": [
+      {
+        "component": "select",
+        "name": "classes",
+        "label": "Variation",
+        "valueType": "string",
+        "multi": false,
+        "options": [
+          {
+            "name": "Image on Right",
+            "value": "image-right"
+          },
+          {
+            "name": "Image on Left",
+            "value": "image-left"
+          }
+        ]
+      },
+      {
+        "component": "text",
+        "name": "title",
+        "label": "Title",
+        "valueType": "string",
+        "required": true
+      },
+      {
+        "component": "text",
+        "name": "blockquote",
+        "label": "Sub Title",
+        "valueType": "string"
+      },
+      {
+        "component": "richtext",
+        "name": "description",
+        "label": "Description",
+        "valueType": "string",
+        "required": true
+      },
+      {
+        "component": "reference",
+        "name": "image",
+        "label": "Image",
+        "valueType": "string",
+        "required": true
+      },
+      {
+        "component": "text",
+        "name": "alt",
+        "label": "Alt Text",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "cta",
+        "label": "CTA Text",
+        "valueType": "string"
+      },
+      {
+        "component": "aem-content",
+        "name": "link",
+        "label": "CTA Link",
+        "valueType": "string"
       }
     ]
   }
