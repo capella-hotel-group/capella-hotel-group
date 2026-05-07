@@ -22,6 +22,8 @@ module.exports = {
       '*': 4, // Default limit for most blocks
       'promo-showcase': 8, // Explicitly allow 8 cells for promo-showcase block
       'promo-showcase-tab': 8, // Explicitly allow 8 cells for promo-showcase-tab block
+      'hero-banner': 8, // Explicitly allow 8 cells for hero-banner block
+      'text-with-image': 8, // Explicitly allow 8 cells for text-with-image block
     }],
   },
 };
