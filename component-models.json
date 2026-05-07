@@ -270,5 +270,96 @@
         "label": "Card Description"
       }
     ]
+  },
+  {
+    "id": "promo-showcase",
+    "fields": [
+      {
+        "component": "text",
+        "name": "title",
+        "label": "Title",
+        "valueType": "string",
+        "required": true
+      }
+    ]
+  },
+  {
+    "id": "promo-showcase-tab",
+    "fields": [
+      {
+        "component": "reference",
+        "name": "logo",
+        "label": "Tab Logo (click to switch tab)",
+        "valueType": "string",
+        "required": true,
+        "description": "Logo image used as the clickable tab selector"
+      },
+      {
+        "component": "text",
+        "name": "logoAlt",
+        "label": "Logo Image Alt Text",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "tab-title",
+        "label": "Tab Title",
+        "valueType": "string",
+        "required": true
+      },
+      {
+        "component": "richtext",
+        "name": "description",
+        "label": "Description",
+        "valueType": "string"
+      },
+      {
+        "component": "reference",
+        "name": "image",
+        "label": "Tab Image",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "imagealt",
+        "label": "Tab Image Alt Text",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
+    "id": "promo-showcase-share-icon",
+    "fields": [
+      {
+        "component": "reference",
+        "name": "icon",
+        "label": "Platform Icon",
+        "valueType": "string",
+        "required": true,
+        "description": "SVG or image icon for the social platform"
+      },
+      {
+        "component": "text",
+        "name": "platformIconalt",
+        "label": "Platform Icon Alt Text",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "url",
+        "label": "Profile / Page URL",
+        "valueType": "string",
+        "required": true,
+        "placeholder": "https://instagram.com/your-profile"
+      },
+      {
+        "component": "text",
+        "name": "name",
+        "label": "Platform Name (optional)",
+        "valueType": "string",
+        "required": false,
+        "placeholder": "e.g. Instagram"
+      }
+    ]
   }
 ]
