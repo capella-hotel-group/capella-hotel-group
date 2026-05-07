@@ -20,8 +20,8 @@ const ENV_CONFIG = [
     hostnames: [
       'localhost',
       'author-p152536-e1620746.adobeaemcloud.com',
-      'main--capella-hotels--capella-hotel-group.aem.page',
-      'main--capella-hotels--capella-hotel-group.aem.live',
+      'main--capella-hotel-group--capella-hotel-group.aem.page',
+      'main--capella-hotel-group--capella-hotel-group.aem.live',
     ],
   },
   {
