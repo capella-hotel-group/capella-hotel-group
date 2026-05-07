@@ -199,10 +199,31 @@ main .section:has(.promo-showcase) > div {
 
 .promo-showcase .ps-social-link picture,
 .promo-showcase .ps-social-link img {
-  width: 24px;
-  height: 24px;
+  width: 20px;
+  height: 20px;
   object-fit: contain;
   display: block;
+}
+
+@media (width >= 600px) {
+  .promo-showcase .ps-social-link img {
+    width: 25px;
+    height: 25px;
+  }
+}
+
+@media (width >= 1024px) {
+  .promo-showcase .ps-social-link img {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+@media (width >= 1920px) {
+  .promo-showcase .ps-social-link img {
+    width: 25px;
+    height: 25px;
+  }
 }
 
 /* ── Image stack ── */
@@ -312,6 +333,7 @@ main .section:has(.promo-showcase) > div {
 
   .promo-showcase .ps-tab {
     padding: 1vw 3.64vw;
+    max-width: 14vw;
   }
 }
 
