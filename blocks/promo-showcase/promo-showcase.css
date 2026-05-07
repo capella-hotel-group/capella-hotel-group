@@ -203,6 +203,7 @@ main .section:has(.promo-showcase) > div {
   height: 20px;
   object-fit: contain;
   display: block;
+  max-height: 100%;
 }
 
 @media (width >= 600px) {
