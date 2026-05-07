@@ -207,6 +207,18 @@
           }
         },
         {
+          "title": "Image with Link",
+          "id": "image-with-link",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/image/v1/image",
+                "template": {}
+              }
+            }
+          }
+        },
+        {
           "title": "Promo Showcase",
           "id": "promo-showcase",
           "plugins": {

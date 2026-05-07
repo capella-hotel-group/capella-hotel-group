@@ -1,8 +1,8 @@
 {
   "definitions": [
     {
-      "title": "Image",
-      "id": "image",
+      "title": "Image with Link",
+      "id": "image-with-link",
       "plugins": {
         "xwalk": {
           "page": {
@@ -15,7 +15,7 @@
   ],
   "models": [
     {
-      "id": "image",
+      "id": "image-with-link",
       "fields": [
         {
           "component": "reference",
@@ -27,8 +27,14 @@
           "component": "text",
           "name": "imageAlt",
           "label": "Alt Text"
+        },
+        {
+          "component": "aem-content",
+          "name": "link",
+          "label": "Link"
         }
       ]
     }
-  ]
+  ],
+   "filters": []
 }
