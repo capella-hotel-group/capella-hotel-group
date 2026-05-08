@@ -281,18 +281,6 @@ main .section:has(.promo-showcase) > div {
     justify-content: center;
   }
 
-  .promo-showcase .ps-title {
-    font-size: 50px;
-  }
-
-  .promo-showcase .ps-brand-title {
-    font-size: 30px;
-  }
-
-  .promo-showcase .ps-description {
-    font-size: 18px;
-  }
-
   .promo-showcase .ps-tabs {
     margin-bottom: 0;
     max-width: 40vw;
@@ -336,9 +324,7 @@ main .section:has(.promo-showcase) > div {
     padding: 1vw 3.64vw;
     max-width: 14vw;
   }
-}
 
-@media (width >= 1024px) {
   .promo-showcase .ps-title {
     font-size: 40px;
   }
