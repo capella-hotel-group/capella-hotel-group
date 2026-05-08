@@ -97,7 +97,7 @@ main .section:has(.text-with-image) > div {
     margin-top: 8vw;
 }
 
-.text-with-image .text-col .cta-link:after {
+.text-with-image .text-col .cta-link::after {
     content: "";
     position: absolute;
     left: 0;
