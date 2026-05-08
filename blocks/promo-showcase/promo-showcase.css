@@ -252,9 +252,9 @@ main .section:has(.promo-showcase) > div {
 
 .promo-showcase .ps-image-slide img {
   width: 100%;
-  height: 120%; /* oversize for parallax room */
+  height: 160%; /* oversize for parallax room */
   position: absolute;
-  top: -10%; /* center vertically */
+  top: -30%; /* center vertically */
   left: 0;
   object-fit: cover;
   display: block;
