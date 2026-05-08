@@ -47,6 +47,7 @@ main .section:has(.text-with-image) > div {
     letter-spacing: 0.08em;
     line-height: 1;
     margin: 0 0 24px;
+    max-width: 150px;
 }
 
 .text-with-image .text-col h4 {
@@ -161,25 +162,28 @@ main .section:has(.text-with-image) > div {
     }
 
     .text-with-image .text-col h3 {
-        font-size: 50px;
+        font-size: 40px;
         line-height: 1;
         margin-bottom: 4.6vw;
     }
 
     .text-with-image .text-col h4 {
-        font-size: 30px;
+        font-size: 25px;
         line-height: 1.2;
     }
 
     .text-with-image .text-col .description {
         padding-left: 4.16vw;
-        font-size: 17px;
+        font-size: 13px;
         line-height: 1.6;
         letter-spacing: 0.6px;
     }
 
     .text-with-image .text-col .cta-link {
+        font-size: 12px;
+        line-height: 1.4;
         margin-top: 2.8vw;
+        letter-spacing: 2px;
     }
 }
 
