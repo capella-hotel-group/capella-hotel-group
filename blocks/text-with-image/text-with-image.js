@@ -44,15 +44,15 @@ export default function decorate(block) {
     desc.innerHTML += descriptionEl.innerHTML;
   }
 
-  textCol.append(desc);
-
   if (ctaHref) {
     const cta = document.createElement('a');
     cta.className = 'cta-link';
     cta.href = ctaHref;
     cta.textContent = ctaText;
-    textCol.append(cta);
+    desc.append(cta);
   }
+
+  textCol.append(desc);
 
   const imageCol = document.createElement('div');
   imageCol.className = 'image-col';
