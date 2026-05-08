@@ -311,25 +311,25 @@
         padding-left: 40px;
         padding-right: 40px;
     }
-
-    .awards-carousel .ac-card-body h3 {
-        font-size: 20px;
-    }
-
-    .awards-carousel .ac-card-body-section p {
-        font-size: 17px;
-        line-height: 1.6;
-    }
 }
 
 @media (width >= 1024px) {
     .awards-carousel .cc-block-title {
-        font-size: 50px;
+        font-size: 40px;
     }
 
     .awards-carousel {
         max-width: none;
         padding-left: 14.427vw;
         padding-right: 14.427vw;
+    }
+
+    .awards-carousel .ac-card-body h3 {
+        font-size: 18px;
+    }
+
+    .awards-carousel .ac-card-body-section p {
+        font-size: 13px;
+        line-height: 1.6;
     }
 }
