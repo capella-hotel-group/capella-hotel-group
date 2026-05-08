@@ -1,234 +1,179 @@
-/* ─── Full-page masthead ───────────────────────────────────────────────────── */
+/* ── Hero Banner ────────────────────────────────────────────────────────── */
+
+main .section:has(.hero-banner),
+main .section:has(.hero-banner) > div {
+  margin: 0;
+  padding: 0;
+}
+
 .hero-banner {
-    --content-bottom: 110px;
-
-    position: relative;
-    width: 100%;
-    height: 100vh; /* fallback */
-    height: 100svh;
-    overflow: hidden;
-    margin: 0;
-    padding: 0;
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  height: 100svh;
+  overflow: hidden;
 }
 
-/* ─── Background video ─────────────────────────────────────────────────────── */
-.hero-banner .hero-banner-video {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: 0;
+/* ── UE edit mode: cap height to avoid layout issues ── */
+
+body[data-aue-resource] .hero-banner {
+  max-height: 1080px;
 }
 
-/* Loading placeholder — fades out on video loadeddata */
-.hero-banner .hero-banner-placeholder {
-    position: absolute;
-    inset: 0;
-    background: #111;
-    z-index: 1;
-    transition: opacity 0.6s ease;
-    pointer-events: none;
+/* ── Background ── */
+
+.hero-banner .hero-banner-bg {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 
-.hero-banner .hero-banner-placeholder.hidden {
+@keyframes hero-banner-zoom-out {
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes hero-banner-fade-in {
+  from {
     opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
-/* ─── Background image (image variant) ────────────────────────────────────── */
-.hero-banner .hero-banner-image {
-    position: absolute;
-    inset: 0;
-    display: block;
-    width: 100%;
-    height: 100%;
+@keyframes hero-banner-slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.hero-banner .hero-banner-image img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+@keyframes hero-banner-content-slide-up {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
 }
 
-/* ─── Logo (image variant) ─────────────────────────────────────────────────── */
+.hero-banner .hero-banner-bg img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.4);
+  opacity: 0;
+  animation:
+    hero-banner-fade-in 0.8s ease forwards,
+    hero-banner-zoom-out 27s linear forwards;
+}
 
-/* Logo zone fills from top to just above content — logo centered inside */
+/* ── Gradient overlay on background (not on content) ── */
+
+.hero-banner .hero-banner-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgb(1 1 1 / 30%), transparent);
+  pointer-events: none;
+}
+
+/* ── Overlay ── */
+
+.hero-banner .hero-banner-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── Logo ── */
+
 .hero-banner .hero-banner-logo {
-    position: absolute;
-    inset: 0 0 calc(var(--content-bottom) );
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 3;
-}
-
-@media (width <= 767px) {
-    .hero-banner .hero-banner-logo {
-        inset: 0; /* content hidden on mobile → logo centers in full box */
-    }
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .hero-banner .hero-banner-logo picture {
-    display: block;
-    max-width: 200px;
+  display: block;
 }
 
 .hero-banner .hero-banner-logo img {
-    display: block;
-    width: 100%;
-    height: auto;
+  width: 14.4rem;
+  height: auto;
+  display: block;
+  animation: hero-banner-slide-up 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.4s both;
 }
 
-/* ─── Content overlay ──────────────────────────────────────────────────────── */
-.hero-banner .hero-banner-overlay {
-    position: absolute;
-    inset: 0;
-    z-index: 2;
-}
+/* ── Content ── */
 
 .hero-banner .hero-banner-content {
-    position: absolute;
-    bottom: var(--content-bottom);
-    left: 0;
-    width: 100%;
-    padding: 0 20px;
-    color: #fff;
-    font-family: var(--heading-font-family);
-    font-size: 1.625rem;
-    line-height: 1.2em;
-    text-align: center;
-    z-index: 2;
+  position: absolute;
+  bottom: 4.7vw;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  padding: 0 8.26vw;
+  animation: hero-banner-content-slide-up 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.65s both;
+  text-align: center;
+  font-family: Goudy, sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+  letter-spacing: 0.6px;
+  color: #fff;
 }
 
-@media (width <= 767px) {
-    .hero-banner .hero-banner-content {
-        font-size: 1.5rem;
-        visibility: hidden;
-    }
+.hero-banner .hero-banner-content p {
+  margin: 0;
 }
 
-/* CTA — opens modal */
-.hero-banner .hero-banner-cta {
-    position: absolute;
-    bottom: 20px;
-    right: 30px;
-    display: block;
-    padding: 0;
-    background: none;
-    border: none;
-    border-bottom: 1px solid #fff;
-    cursor: pointer;
-    font-family: var(--body-font-family);
-    font-size: 0.875rem;
-    text-transform: uppercase;
-    color: #fff;
-    letter-spacing: 1px;
+
+/* ── Scroll chevron ── */
+
+@keyframes hero-banner-chevron-bounce {
+  0% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  60% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(12px);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(12px);
+  }
 }
 
-@media (width <= 767px) {
-    .hero-banner .hero-banner-cta {
-        right: 20px;
-    }
+.hero-banner .hero-banner-chevron {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  width: 32px;
+  height: 20px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 38.6 13.5'%3E%3Cpath d='M1.3,1.2L20,12.4L38.7,1.2' fill='none' stroke='%23fff' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  animation: hero-banner-chevron-bounce 2.4s ease-out infinite;
 }
 
-.hero-banner .hero-banner-cta:hover {
-    opacity: 0.7;
-}
-
-/* Scroll indicator (span.icon extracted from content; SVG fallback when absent) */
-.hero-banner .hero-banner-scroll-icon {
-    position: absolute;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 3;
-    width: 60px;
-    height: 40px;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 14'%3E%3Cpolyline points='1.3,1.2 20,12.4 38.7,1.2' fill='none' stroke='%23fff' stroke-width='2.25'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 40px 14px;
-    animation: hero-banner-scroll-hint 3s ease-out infinite;
-}
-
-/* Hide fallback background when real icon is present */
-.hero-banner .hero-banner-scroll-icon:has(.icon) {
-    background-image: none;
-}
-
-.hero-banner .hero-banner-scroll-icon .icon,
-.hero-banner .hero-banner-scroll-icon img {
-    width: 60px;
-    height: 40px;
-}
-
-@media (width <= 767px) {
-    .hero-banner .hero-banner-scroll-icon {
-        bottom: 110px;
-    }
-}
-
-@keyframes hero-banner-scroll-hint {
-    0% {
-        opacity: 1;
-        transform: translateX(-50%) translateY(0);
-    }
-
-    60% {
-        opacity: 0;
-        transform: translateX(-50%) translateY(14px);
-    }
-
-    100% {
-        opacity: 0;
-        transform: translateX(-50%) translateY(14px);
-    }
-}
-
-/* ─── Modal ────────────────────────────────────────────────────────────────── */
-.hero-banner-modal {
-    position: fixed;
-    inset: 0;
-    z-index: 9999;
-    background: rgb(0 0 0 / 85%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.hero-banner-modal-inner {
-    position: relative;
-    width: min(90vw, 1280px);
-    aspect-ratio: 16 / 9;
-}
-
-.hero-banner-modal-video {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-}
-
-.hero-banner-modal-close {
-    position: absolute;
-    top: -40px;
-    right: 0;
-    background: none;
-    border: none;
-    color: #fff;
-    font-size: 2rem;
-    cursor: pointer;
-    line-height: 1;
-    padding: 4px 8px;
-}
-
-.hero-banner-modal-close:hover {
-    opacity: 0.7;
-}
-
-/* ─── Mobile ───────────────────────────────────────────────────────────────── */
-@media (width <= 767px) {
-    .hero-banner-modal-inner {
-        width: 95vw;
-    }
-}
