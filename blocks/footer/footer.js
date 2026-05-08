@@ -21,11 +21,23 @@ export default async function decorate(block) {
   // Build logos
   const logosEl = document.createElement('div');
   logosEl.className = 'footer-logos';
+  const logoNames = ['capella', 'patina'];
   const logoPictures = logoSection ? [...logoSection.querySelectorAll('picture')] : [];
   logoPictures.forEach((picture, i) => {
     const logoEl = document.createElement('div');
-    logoEl.className = `footer-logo footer-logo--${i === 0 ? 'capella' : 'patina'}`;
-    logoEl.append(picture);
+    logoEl.className = `footer-logo footer-logo--${logoNames[i] ?? i}`;
+    // Link is in the next <p> sibling after the picture's <p>
+    const picturePara = picture.closest('p');
+    const linkPara = picturePara?.nextElementSibling;
+    const linkHref = linkPara?.querySelector('a')?.getAttribute('href');
+    if (linkHref) {
+      const a = document.createElement('a');
+      a.href = linkHref;
+      a.append(picture);
+      logoEl.append(a);
+    } else {
+      logoEl.append(picture);
+    }
     logosEl.append(logoEl);
   });
 
