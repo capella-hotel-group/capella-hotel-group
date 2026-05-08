@@ -20,6 +20,20 @@
         "name": "keywords",
         "multi": true,
         "label": "Keywords"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "nav",
+        "multi": false,
+        "label": "Header"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "footer",
+        "multi": false,
+        "label": "Footer"
       }
     ]
   },
