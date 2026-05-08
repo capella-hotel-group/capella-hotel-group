@@ -339,7 +339,7 @@
     .cc-block-title {
         padding-left: 0;
         padding-right: 0;
-        font-size: 50px;
+        font-size: 40px;
     }
 
     .cc-arrows {
@@ -348,12 +348,12 @@
     }
 
     .cc-card-body h3 {
-        font-size: 30px;
+        font-size: 25px;
         line-height: 1.2;
     }
 
     .cc-card-body p {
-        font-size: 17px;
+        font-size: 13px;
         line-height: 1.6;
     }
 }
