@@ -170,9 +170,9 @@ footer .footer-nav a:hover {
   }
 }
 
-/* ── Wide ≥1440px ── */
+/* ── Wide ≥1024px ── */
 
-@media (width >= 1440px) {
+@media (width >= 1024px) {
   footer .footer {
     padding: 5vw 14.427vw;
   }

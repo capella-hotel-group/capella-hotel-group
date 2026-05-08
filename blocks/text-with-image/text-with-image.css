@@ -187,9 +187,9 @@ main .section:has(.text-with-image) > div {
     }
 }
 
-/* ── Wide ≥1440px ── */
+/* ── Wide ≥1024px ── */
 
-@media (width >= 1440px) {
+@media (width >= 1024px) {
     .text-with-image {
         padding: 80px 14.427vw;
     }

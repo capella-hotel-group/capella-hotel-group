@@ -329,7 +329,7 @@
     }
 }
 
-@media (width >= 1440px) {
+@media (width >= 1024px) {
     .highlights-carousel {
         max-width: none;
         padding-left: 14.427vw;

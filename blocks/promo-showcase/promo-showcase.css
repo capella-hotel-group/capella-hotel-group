@@ -323,7 +323,7 @@ main .section:has(.promo-showcase) > div {
   }
 }
 
-@media (width >= 1280px) {
+@media (width >= 1024px) {
   .promo-showcase .ps-left {
     padding: 0 14.427vw 7.8vw;
   }
