@@ -1,5 +1,6 @@
 import { getMetadata } from '../../scripts/aem.js';
 import { loadFragment } from '../fragment/fragment.js';
+import { getFragmentBasePath } from '../../scripts/site-config.js';
 
 // media query match that indicates desktop width
 const isDesktop = window.matchMedia('(min-width: 900px)');
@@ -144,10 +145,29 @@ function removeHoverHandlers(navDrops) {
 }
 
 export default async function decorate(block) {
-  // load nav as fragment
+  // ── Resolve nav fragment path ──────────────────────────────────────────────
+  // Option 1: meta tag set by author
   const navMeta = getMetadata('nav');
-  const navPath = navMeta ? new URL(navMeta, window.location).pathname : '/nav';
-  const fragment = await loadFragment(navPath);
+  let navPath = navMeta ? new URL(navMeta, window.location).pathname : null;
+
+  // Option 2: derive from URL using shared helper
+  if (!navPath) {
+    const { basePath } = getFragmentBasePath();
+    navPath = `${basePath}/nav`;
+  }
+
+  let fragment = await loadFragment(navPath);
+
+  // Final fallback to /nav
+  if (!fragment?.children?.length) {
+    fragment = await loadFragment('/nav');
+  }
+
+  // Hide header entirely if no fragment could be loaded
+  if (!fragment?.children?.length) {
+    block.closest('header')?.style.setProperty('display', 'none');
+    return;
+  }
 
   // decorate nav DOM
   block.textContent = '';
@@ -160,7 +180,6 @@ export default async function decorate(block) {
     const section = nav.children[i];
     if (section) section.classList.add(`nav-${c}`);
   });
-  console.log('Decorated nav:', nav);
   // Remove any extra sections beyond brand + sections (e.g. empty nav-tools)
   while (nav.children.length > 2) nav.lastElementChild.remove();
 

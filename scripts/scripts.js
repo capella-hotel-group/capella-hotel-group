@@ -12,6 +12,13 @@ import {
   loadCSS,
 } from './aem.js';
 
+export {
+  SUPPORTED_SITES,
+  RTL_LANGS,
+  VALID_LANG_PRIMARIES,
+  getFragmentBasePath,
+} from './site-config.js';
+
 /**
  * Moves all the attributes from a given elmenet to another given element.
  * @param {Element} from the element to copy attributes from
