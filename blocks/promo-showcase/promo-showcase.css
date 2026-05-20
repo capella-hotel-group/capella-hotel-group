@@ -382,3 +382,16 @@ main .section:has(.promo-showcase) > div {
     width: calc(100% + 40px);
   }
 }
+
+/* ── Authoring only ── */
+
+@media (width >= 768px) {
+  body[data-aue-resource] .promo-showcase .ps-left {
+    min-height: 1080px;
+    max-height: 1080px;
+  }
+
+  body[data-aue-resource] .promo-showcase .ps-image-stack {
+    max-height: 1080px;
+  }
+}
